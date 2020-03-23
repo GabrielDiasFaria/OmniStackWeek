@@ -5,6 +5,7 @@ npm init -y
 node index.js
 
 // Iniciar Projeto React
+npm i -g create-react-app
 npx create-react-app Nome_Do_Projeto
 
 // Rodar o React

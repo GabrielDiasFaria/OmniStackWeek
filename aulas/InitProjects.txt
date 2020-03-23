@@ -1,0 +1,11 @@
+// Iniciar os Projetos Node
+npm init -y
+
+// Rodar o Node
+node index.js
+
+// Iniciar Projeto React
+npx create-react-app Nome_Do_Projeto
+
+// Rodar o React
+npm start

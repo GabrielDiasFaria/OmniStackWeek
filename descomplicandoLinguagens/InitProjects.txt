@@ -1,0 +1,21 @@
+// Iniciar os Projetos Node
+npm init -y
+
+// Rodar o Node
+node index.js
+
+// Iniciar Projeto React
+npm i -g create-react-app
+npx create-react-app Nome_Do_Projeto
+
+// Rodar o React
+npm start
+
+// Extensões React
+npm i react-icons
+npm i react-router-dom
+npm i axios
+
+
+CSS
+-> https://fezvrasta.github.io/bootstrap-material-design/docs/4.0/getting-started/introduction/

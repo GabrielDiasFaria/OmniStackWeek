@@ -4,7 +4,7 @@ const cors = require('cors')
 
 const app = express()
 
-// Quando for para PRD
+// Quando for para PRD -
 // app.use(cors({
 //     origin: 'http://meuapp.com'
 // }))

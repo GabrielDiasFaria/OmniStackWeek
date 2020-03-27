@@ -8,7 +8,6 @@ import './style.css'
 
 export default function Profile() {
     return (
-
         <div class="pos-f-t">
             {/* navbar-expand-lg -> Basta colocar para começar com aberto */}
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -19,7 +18,7 @@ export default function Profile() {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse w-100 order-1 order-md-0" id="navbarNav">
-                    <Link to="/profile" className="btn btn-sm profile_navLink">
+                    <Link to="/dashboard" className="btn btn-sm profile_navLink">
                         Dashboard
                     </Link>
                     <div class="dropdown dropleft">
@@ -27,24 +26,36 @@ export default function Profile() {
                             Blogposts
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropBlogpost">
-                            <p className="dropdown-item" >Posts</p>
-                            <p className="dropdown-item" >Categorias</p>
-                            <p className="dropdown-item" >Tags</p>
+                            <p className="dropdown-item" >
+                                <Link to="/posts">
+                                    Posts
+                                </Link>
+                            </p>
+                            <p className="dropdown-item" >
+                                <Link to="/categories">
+                                    Categorias
+                                </Link>
+                            </p>
+                            <p className="dropdown-item" >
+                                <Link to="/tags">
+                                    Tags
+                                </Link>
+                            </p>
                         </div>
                     </div>
-                    <Link to="/profile" className="btn btn-sm profile_navLink">
+                    <Link to="/midias" className="btn btn-sm profile_navLink">
                         Mídias
                     </Link>
-                    <Link to="/profile" className="btn btn-sm profile_navLink">
+                    <Link to="/pages" className="btn btn-sm profile_navLink">
                         Páginas
                     </Link>
-                    <Link to="/profile" className="btn btn-sm profile_navLink">
+                    <Link to="/plugins" className="btn btn-sm profile_navLink">
                         Plugins
                     </Link>
-                    <Link to="/profile" className="btn btn-sm profile_navLink">
+                    <Link to="/users" className="btn btn-sm profile_navLink">
                         Usuários
                     </Link>
-                    <Link to="/profile" className="btn btn-sm profile_navLink">
+                    <Link to="/configuration" className="btn btn-sm profile_navLink">
                         Configuração
                     </Link>
                 </div>
@@ -68,26 +79,6 @@ export default function Profile() {
 
                 </div>
             </nav>
-            {/* <div class="collapse" id="navbarToggleExternalContent">
-                <div class="bg-dark p-4">
-                    <img src={logoImg} width="50" height="50" alt=""></img>
-                    <br />
-                    <h4 class="text-white">Menu</h4>
-
-                    <button type="button" class="btn btn-light">Categorias</button>
-                    <button type="button" class="btn btn-light">Tags</button>
-                </div>
-            </div>
-            <nav class="navbar navbar-dark bg-dark">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <h1 className="profile_title_user">Olá, Gabriel</h1>
-                <button type="button" className="profile_logout_button">
-                    <FiPower size={18} color="#000" />
-                </button>
-            </nav> */}
         </div>
     )
 }

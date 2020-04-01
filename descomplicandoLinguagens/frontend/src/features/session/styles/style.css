@@ -1,0 +1,75 @@
+.session_container{
+    background-color: #201F24;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    position:absolute; top:0; bottom:0; right:0; left:0;
+}
+
+.divider {
+  border-left: 1px solid #FFF;
+  top: 50px;
+} 
+
+.session_form{
+    margin-top: 25%;
+    text-align: center;
+}
+
+.session_form input{
+    width: 100%;
+    height: 30px;
+    color: #333;
+    border: 1px solid #dcdce6;
+    border-radius: 77px;
+    padding: 0 20px;
+    margin-top: 10px;  
+    font-size: 12px;
+}
+
+.session_form h1{
+    color: #FFF;
+    font-size: 20px;
+}
+
+.session_form button{
+    height: 30px;
+    color: #333;
+    border: 1px solid #09F4C4;
+    border-radius: 77px;
+    padding: 0 24px;
+    background-color: #09F4C4;
+    font-size: 12px;
+    transition: filter 0.5s;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.session_form button:hover{
+    filter: brightness(70%);
+}
+
+.session_form div{
+    text-align: center;
+}
+
+.session_logo img{
+    max-width: 300px;
+    margin-top: 25%; 
+}
+
+.session_link{
+    color:#FFF;
+    transition: filter 0.5s;
+}
+
+.session_link:hover{
+    color:#FFF;
+    filter: brightness(60%);
+}
+
+.session_link_icon{
+    color: #09F4C4;
+    margin-right: 5px;
+}

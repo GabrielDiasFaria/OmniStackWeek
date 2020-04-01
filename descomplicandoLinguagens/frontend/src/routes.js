@@ -1,23 +1,24 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import Session from './pages/Session'
-import Register from './pages/Register'
-import Dashboard from './pages/Dashboard'
-import Posts from './pages/Posts'
-import Tags from './pages/Tags'
-import Categories from './pages/Categories'
+import Session from './features/session/pages/index'
+import Register from './features/session/pages/Register'
+import Dashboard from './features/dashboard/pages/PageDashboard'
+import ListTag from './features/tag/pages/PageListTag'
+import ListCategory from './features/category/pages/PageListCategory'
+import ListUser from './features/users/pages/PageListUser'
 
 export default function Routes() {
     return (
         <BrowserRouter>
             <Switch>
-                <Route path="/" exact component={Session} />
-                <Route path="/register" exact component={Register} />
-                <Route path="/dashboard" exact component={Dashboard} />
-                <Route path="/posts" exact component={Posts} />
-                <Route path="/tags" exact component={Tags} />
-                <Route path="/categories" exact component={Categories} />
+                <Route path="/Blog" exact component={Session} />
+                <Route path="/Blog/Register" exact component={Register} />
+                <Route path="/Blog/Dashboard" exact component={Dashboard} />
+
+                <Route path="/Blog/ListCategory" exact component={ListCategory} />
+                <Route path="/Blog/ListTag" exact component={ListTag} />
+                <Route path="/Blog/ListUser" exact component={ListUser} />
             </Switch>
         </BrowserRouter>
     )

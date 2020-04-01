@@ -1,0 +1,86 @@
+.backgroundTheme{
+    background-color: #000;
+}
+
+.backgroundTheme2{
+    background-color: #000;
+}
+
+.colorWhite{
+    color: #FFF;
+}
+
+/* .profile_logout_button {
+    height: 30px;
+    color: #333;
+    border: 1px solid #FFF;
+    border-radius: 10px;
+    padding: 0 24px;
+    background-color: #FFF;
+    transition: filter 0.5s;
+}
+
+.profile_logout_button:hover{
+    filter: brightness(70%);
+}
+
+.profile_title_user{
+    color: #FFF;
+    margin-right: 40px;
+    transition: filter 0.5s;
+}
+
+.profile_title_user:hover{
+    color: #FFF;
+    filter: brightness(80%);
+}
+
+.profile_title_font{
+    font-size: 10px;
+}
+
+.profile_navLink{
+    margin-left: 5px;
+    color: #FFF;
+    transition: filter 0.5s;
+}
+
+.profile_navLink:hover{
+    filter: brightness(80%);
+    color: #FFF;
+    text-decoration: none;
+}
+
+.profile_navLink_Icon{
+    margin-left: 8px;
+    color: #FFF;
+}
+
+.profile_badge{
+    margin-right: 15px;
+}
+
+.profileFiBell{
+    margin-left: 8px;
+    transition: filter 0.5s;
+    color: #FFF;
+}
+
+.profileFiBell:hover{
+    filter: brightness(80%);
+    color: #FFF;
+    text-decoration: none;
+}
+
+
+
+.drop_item{
+    font-size: 10px;
+} */
+
+.brand_logo{
+    width: 100px;
+    height: 90px;
+    margin-left: 40%;
+    margin-top: -25px;
+}

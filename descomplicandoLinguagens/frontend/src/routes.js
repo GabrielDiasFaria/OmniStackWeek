@@ -7,6 +7,7 @@ import Dashboard from './features/dashboard/pages/PageDashboard'
 import ListTag from './features/tag/pages/PageListTag'
 import ListCategory from './features/category/pages/PageListCategory'
 import ListUser from './features/users/pages/PageListUser'
+import ListPost from './features/post/pages/PageListPost'
 
 export default function Routes() {
     return (
@@ -16,6 +17,7 @@ export default function Routes() {
                 <Route path="/Blog/Register" exact component={Register} />
                 <Route path="/Blog/Dashboard" exact component={Dashboard} />
 
+                <Route path="/Blog/ListPost" exact component={ListPost} />
                 <Route path="/Blog/ListCategory" exact component={ListCategory} />
                 <Route path="/Blog/ListTag" exact component={ListTag} />
                 <Route path="/Blog/ListUser" exact component={ListUser} />

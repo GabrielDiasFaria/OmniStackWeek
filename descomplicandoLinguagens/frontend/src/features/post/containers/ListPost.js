@@ -3,7 +3,7 @@ import { FiTrash, FiEdit } from 'react-icons/fi'
 
 import logoAvatar from '../../../_assets/img/avatar.jpg'
 
-export default function ListUser({ list, startEditRow, deleteRegister }) {
+export default function ListPost({ list, startEditRow, deleteRegister }) {
     return (
         <section id="unseen">
             <table className="table table-hover table-striped table-condensed" >
@@ -11,10 +11,9 @@ export default function ListUser({ list, startEditRow, deleteRegister }) {
                     <tr>
                         <th>#</th>
                         <th>Avatar</th>
-                        <th>Nome</th>
-                        <th>Função</th>
-                        <th>Resumo Perfil</th>
-                        <th>Email</th>
+                        <th>Descrição</th>
+                        <th>Tag</th>
+                        <th>Categoria</th>
                         <th>Editar</th>
                         <th>Deletar</th>
                     </tr>
@@ -25,11 +24,10 @@ export default function ListUser({ list, startEditRow, deleteRegister }) {
                             list.map(line => (
                                 <tr key={line.id}>
                                     <td>{line.id}</td>
-                                    <td><img src={logoAvatar} alt="User Img" /></td>
-                                    <td>{line.name}</td>
-                                    <td>{line.function}</td>
-                                    <td>{line.profile}</td>
-                                    <td><p>{line.email}</p></td>
+                                    <td><img src={logoAvatar} alt="Post Img" /></td>
+                                    <td>{line.description}</td>
+                                    <td>{line.tag}</td>
+                                    <td>{line.category}</td>
                                     <td>
                                         <button onClick={() => { startEditRow(line) }} className="btn icon_default">
                                             <FiEdit size={16} />

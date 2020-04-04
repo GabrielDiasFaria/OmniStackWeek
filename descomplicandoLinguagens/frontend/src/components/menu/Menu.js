@@ -34,11 +34,11 @@ export default function Menu() {
                             </li>
 
                             <li className="dropdown">
-                                <a data-toggle="dropdown" data-hover="dropdown" className="dropdown-toggle colorWhite" href="#">
+                                <a data-toggle="dropdown" data-hover="dropdown" className="dropdown-toggle colorWhite" href="/">
                                     Blogposts <b><FiChevronDown /></b>
                                 </a>
                                 <ul className="dropdown-menu">
-                                    <li><Link to="/Blog/ListPosts">Posts</Link></li>
+                                    <li><Link to="/Blog/ListPost">Posts</Link></li>
                                     <li><Link to="/Blog/ListCategory">Categorias</Link></li>
                                     <li><Link to="/Blog/ListTag">Tags</Link></li>
                                 </ul>
@@ -82,14 +82,14 @@ export default function Menu() {
                             </li>
 
                             <li className="dropdown">
-                                <a data-toggle="dropdown" className="dropdown-toggle" href="#">
+                                <a data-toggle="dropdown" className="dropdown-toggle" href="/">
                                     <img alt="" src={logoAvatar}></img>
                                     <span className="username"> Gabriel Dias</span>
                                     <b className="caret"></b>
                                 </a>
                                 <ul className="dropdown-menu extended logout">
-                                    <li><a href="#"><FiBell /> Notificações <span className="badge bg-success">8</span></a></li>
-                                    <li><a href="#"><FiKey /> Log Out</a></li>
+                                    <li><a href="/"><FiBell /> Notificações <span className="badge bg-success">8</span></a></li>
+                                    <li><a href="/"><FiKey /> Log Out</a></li>
                                 </ul>
                             </li>
 

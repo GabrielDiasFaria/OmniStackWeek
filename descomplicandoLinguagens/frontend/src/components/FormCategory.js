@@ -37,7 +37,7 @@ export default function FormCategory({ category, handleInputChange, typeChange }
                     </button> */}
                 <button type="submit" class="btn btn-round btn-primary">
                     Salvar
-                    </button>
+                </button>
             </div>
         </div>
     )

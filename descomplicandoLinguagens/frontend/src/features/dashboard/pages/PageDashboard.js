@@ -7,7 +7,7 @@ export default function PageDashboard() {
     return (
         <section id="main-content">
             <header>
-                {<Menu />}
+                {<Menu activeOption="Dashboard" />}
             </header>
 
             <section className="wrapper">

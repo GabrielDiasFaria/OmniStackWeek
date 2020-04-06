@@ -94,7 +94,7 @@ export default function PageListUser() {
     return (
         <section id="main-content">
             <header>
-                {<Menu />}
+                {<Menu activeOption="User" />}
             </header>
 
             <SweetAlert success show={boolAlert} title={msgAlert} onConfirm={hideAlert}>

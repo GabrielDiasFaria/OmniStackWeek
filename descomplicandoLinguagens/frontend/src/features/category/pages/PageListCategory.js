@@ -85,7 +85,7 @@ export default function PageListCategory() {
     return (
         <section id="main-content">
             <header>
-                {<Menu />}
+                {<Menu activeOption="Category" />}
             </header>
 
             <SweetAlert success show={boolAlert} title={msgAlert} onConfirm={hideAlert}>

@@ -84,7 +84,7 @@ export default function PageListPost() {
     return (
         <section id="main-content">
             <header>
-                {<Menu />}
+                {<Menu activeOption="Post" />}
             </header>
 
             <SweetAlert success show={boolAlert} title={msgAlert} onConfirm={hideAlert}>

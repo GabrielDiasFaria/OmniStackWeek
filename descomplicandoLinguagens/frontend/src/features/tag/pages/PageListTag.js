@@ -85,7 +85,7 @@ export default function PageListTag() {
     return (
         <section id="main-content">
             <header>
-                {<Menu />}
+                {<Menu activeOption="Tag" />}
             </header>
 
             <SweetAlert success show={boolAlert} title={msgAlert} onConfirm={hideAlert}>

@@ -7,7 +7,30 @@ import logoAvatar from '../../_assets/img/avatar.jpg'
 
 import './style.css'
 
-export default function Menu() {
+export default function Menu({ activeOption }) {
+
+    let actvBlogPost, actvDashboard, actvTag, actvUser, actvCategory, actvPost = ''
+
+    switch (activeOption) {
+        case "Dashboard":
+            actvDashboard = "active"
+            break
+        case "Tag":
+            actvTag = "active"
+            break
+        case "Category":
+            actvCategory = "active"
+            break
+        case "Post":
+            actvPost = "active"
+            break
+        case "User":
+            actvUser = "active"
+            break
+        default:
+            break
+    }
+
     return (
         <section id="container" className="hr-menu">
 
@@ -27,7 +50,7 @@ export default function Menu() {
 
                     <div className="horizontal-menu navbar-collapse collapse">
                         <ul className="nav navbar-nav">
-                            <li>
+                            <li className={actvDashboard}>
                                 <Link to="/Blog/Dashboard" className="colorWhite">
                                     Dashboard
                                 </Link>
@@ -38,9 +61,9 @@ export default function Menu() {
                                     Blogposts <b><FiChevronDown /></b>
                                 </a>
                                 <ul className="dropdown-menu">
-                                    <li><Link to="/Blog/ListPost">Posts</Link></li>
-                                    <li><Link to="/Blog/ListCategory">Categorias</Link></li>
-                                    <li><Link to="/Blog/ListTag">Tags</Link></li>
+                                    <li className={actvPost}><Link to="/Blog/ListPost">Posts</Link></li>
+                                    <li className={actvCategory} ><Link to="/Blog/ListCategory">Categorias</Link></li>
+                                    <li className={actvTag}><Link to="/Blog/ListTag">Tags</Link></li>
                                 </ul>
                             </li>
                             <li>
@@ -58,7 +81,7 @@ export default function Menu() {
                                     Plugins
                                 </Link>
                             </li>
-                            <li>
+                            <li className={actvUser}>
                                 <Link to="/Blog/ListUser" className="colorWhite">
                                     Usuários
                                 </Link>

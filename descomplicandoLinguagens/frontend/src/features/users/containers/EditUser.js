@@ -22,7 +22,7 @@ export default function EditUser(props) {
         let { name, value } = event.target
         let modifiedUser = { ...user }
 
-        if (value == "true") {
+        if (value === "true") {
             value = false
         }
         else {
@@ -58,6 +58,8 @@ export default function EditUser(props) {
                 break
             case 'user.update':
                 modifiedUser.permission.user.update = value
+                break
+            default:
                 break
         }
 

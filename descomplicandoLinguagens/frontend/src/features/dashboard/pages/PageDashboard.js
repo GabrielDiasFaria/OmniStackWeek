@@ -5,13 +5,15 @@ import '../styles/style_dashboard.css'
 
 export default function PageDashboard() {
     return (
-        <div>
+        <section id="main-content">
             <header>
-                {Menu()}
+                {<Menu />}
             </header>
-            <session>
-                <h1>Vai</h1>
-            </session>
-        </div>
+
+            <section className="wrapper">
+
+            </section>
+
+        </section>
     )
 }

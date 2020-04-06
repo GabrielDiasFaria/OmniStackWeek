@@ -4,6 +4,7 @@ import { FiTrash, FiEdit } from 'react-icons/fi'
 import logoAvatar from '../../../_assets/img/avatar.jpg'
 
 export default function ListUser({ list, startEditRow, deleteRegister }) {
+
     return (
         <section id="unseen">
             <table className="table table-hover table-striped table-condensed" >

@@ -8,7 +8,7 @@ export default function FormTag({ tag, handleInputChange, typeChange }) {
                 <br />
 
                 <div className="form-group">
-                    <label for="category_name" className="bmd-label-floating">#</label>
+                    <label for="category_id" className="bmd-label-floating">#</label>
                     <input placeholder="Id" disabled name="id" className="form-control" id="category_id" value={tag.id} onChange={handleInputChange}></input>
                 </div>
 
@@ -32,12 +32,9 @@ export default function FormTag({ tag, handleInputChange, typeChange }) {
                                     é todo em minúsculas e contém apenas letras, números e hífens.</span>
                 </div>
 
-                {/* <button type="submit" className="btn btn_default">
-                        Salvar
-                    </button> */}
                 <button type="submit" class="btn btn-round btn-primary">
                     Salvar
-                    </button>
+                </button>
             </div>
         </div>
     )

@@ -1,6 +1,13 @@
 // Iniciar os Projetos Node
 npm init -y
 
+// Dependencias Nodejs
+npm i express
+npm i cors
+npm i nodemon
+npm i knex
+npm i sqlite3
+
 // Rodar o Node
 node index.js
 

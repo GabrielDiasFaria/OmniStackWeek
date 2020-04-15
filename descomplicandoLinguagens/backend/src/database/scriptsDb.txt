@@ -1,6 +1,0 @@
-CREATE TABLE "tb_tag" (
-	"id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	"name"	TEXT NOT NULL,
-	"description"	TEXT NOT NULL,
-	"slug"	TEXT NOT NULL
-);

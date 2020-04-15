@@ -1,9 +1,9 @@
-var TagSchema = require('../model/TagModel');
+var CategorySchema = require('../model/CategoryModel');
 
 module.exports = {
 
     async list(req, res) {
-        await TagSchema.find((err, object) => {
+        await CategorySchema.find((err, object) => {
             if (err)
                 return res.send(err)
             else
@@ -12,7 +12,7 @@ module.exports = {
     },
 
     async details(req, res) {
-        await TagSchema.findById(req.params.id, (err, object) => {
+        await CategorySchema.findById(req.params.id, (err, object) => {
             if (err)
                 return res.send(err)
             else
@@ -21,7 +21,7 @@ module.exports = {
     },
 
     async create(req, res) {
-        let tag = new TagSchema(
+        let category = new CategorySchema(
             {
                 name: req.body.name,
                 description: req.body.description,
@@ -29,7 +29,7 @@ module.exports = {
             }
         )
 
-        await tag.save((err) => {
+        await category.save((err) => {
             if (err)
                 return res.send(err)
             else
@@ -45,8 +45,8 @@ module.exports = {
             slug: req.body.slug
         }
 
-        await TagSchema.updateOne(filter, update, (err, result) => {
-            if (result.ok === 1)
+        await CategorySchema.updateOne(filter, update, (err, result) => {
+            if (!err)
                 return res.send({ status: "Registro modificado com sucesso!" })
             else
                 return res.send(err)
@@ -55,7 +55,7 @@ module.exports = {
     },
 
     async delete(req, res) {
-        await TagSchema.deleteOne({ _id: req.params.id }, (err) => {
+        await CategorySchema.deleteOne({ _id: req.params.id }, (err) => {
             if (err)
                 return res.send(err)
             else

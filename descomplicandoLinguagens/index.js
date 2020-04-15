@@ -1,7 +1,6 @@
 var http = require('http');
 http.createServer(function (req, res) {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('Hello Node Tentando fazer acontecer\n');
-}).listen(process.env.PORT_INDEX);
-console.log('Server running at :' + process.env.PORT_INDEX);
-
+  res.end('Hello Node\n');
+}).listen(21259);
+console.log('Server running at :' + 21259);

@@ -19,8 +19,8 @@ export default function ListTag({ tags, startEditRow, deleteTag }) {
                 {
                     tags.length > 0 ? (
                         tags.map(tag => (
-                            <tr key={tag.id}>
-                                <td>{tag.id}</td>
+                            <tr key={tag._id}>
+                                <td>{tag._id}</td>
                                 <td>{tag.name}</td>
                                 <td>{tag.description}</td>
                                 <td>{tag.slug}</td>
@@ -30,7 +30,7 @@ export default function ListTag({ tags, startEditRow, deleteTag }) {
                                     </button>
                                 </td>
                                 <td>
-                                    <button onClick={() => { deleteTag(tag.id) }} className="btn icon_default">
+                                    <button onClick={() => { deleteTag(tag._id) }} className="btn icon_default">
                                         <FiTrash size={16} />
                                     </button>
                                 </td>

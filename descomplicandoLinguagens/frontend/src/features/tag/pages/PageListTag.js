@@ -1,6 +1,8 @@
 import React, { useState, Fragment } from 'react'
 import SweetAlert from 'react-bootstrap-sweetalert'
 
+import api from '../../../services/api'
+
 import Menu from '../../../components/menu/Menu'
 import ListTag from '../containers/ListTag'
 import NewTag from '../containers/NewTag'
@@ -10,14 +12,20 @@ import '../styles/style_tag.css'
 
 export default function PageListTag() {
 
-    const listTags = [
-        { id: 1, name: 'SAP', description: 'Descrição aqui...', slug: 'SAP' },
-        { id: 2, name: 'ABAP', description: 'Descrição aqui...', slug: 'ABAP' },
-        { id: 3, name: 'ABAPS', description: 'Descrição aqui vai...', slug: 'ABAPS' }
-    ]
-    const initialFormState = { id: 0, name: '', description: '', slug: '' }
+    const initialFormState = { _id: 0, name: '', description: '', slug: '' }
 
-    const [tags, setTags] = useState(listTags)
+    const [_id, setId] = useState('')
+    const [name, setName] = useState('')
+    const [description, setDescription] = useState('')
+    const [slug, setSlug] = useState('')
+    const data = {
+        _id,
+        name,
+        description,
+        slug
+    }
+
+    const [tags, setTags] = useState([])
     const [currentTag, setCurrentTag] = useState(initialFormState)
     const [editing, setEditing] = useState(false)
     const [adding, setAdding] = useState(false)
@@ -25,24 +33,38 @@ export default function PageListTag() {
     const [boolAlert, setBoolAlert] = useState(false)
     const [txtButton, setTxtButton] = useState('Adicionar')
 
+    const fetchTag = async () => {
+        const response = await api.get('tags')
+        setTags(response.data)
+        // setTags([
+        //     { id: 1, name: 'SAP', description: 'Descrição aqui...', slug: 'SAP' },
+        //     { id: 2, name: 'ABAP', description: 'Descrição aqui...', slug: 'ABAP' },
+        //     { id: 3, name: 'ABAPS', description: 'Descrição aqui vai...', slug: 'ABAPS' }
+        // ])
+    }
+
     /** Delete Tag */
-    const deleteTag = id => {
+    const deleteTag = async id => {
         setEditing(false)
-        setTags(tags.filter(tag => tag.id !== id))
+        // setTags(tags.filter(tag => tag.id !== id))
+        const response = await api.delete(`tags/${id}`)
 
         setMsgAlert(`Tag (${id}) deletada com sucesso!`)
-        showAlert(true)
+        showAlert()
+
+        fetchTag()
     }
 
     /** End New */
-    const endAddTag = tag => {
+    const endAddTag = async tag => {
         setAdding(false)
-        tag.id = 0
-        setTags([...tags, tag])
+        const response = await api.post('tags', tag)
 
         setMsgAlert(`Tag (${tag.id}) criada com sucesso!`)
-        showAlert(true)
+        showAlert()
         setTxtButton('Adicionar')
+
+        fetchTag()
     }
 
     /** Start New */
@@ -65,13 +87,16 @@ export default function PageListTag() {
     }
 
     /** End Edit */
-    const endEditRow = (id, updatedTag) => {
+    const endEditRow = async (id, updatedTag) => {
         setEditing(false)
-        setTags(tags.map(tag => (tag.id === id ? updatedTag : tag)))
+        // setTags(tags.map(tag => (tag.id === id ? updatedTag : tag)))
+        const response = await api.put(`tags/${id}`, updatedTag)
 
         setMsgAlert(`Tag (${id}) modificada com sucesso!`)
-        showAlert(true)
+        showAlert()
         setTxtButton('Adicionar')
+
+        fetchTag()
     }
 
     const hideAlert = () => {
@@ -100,6 +125,9 @@ export default function PageListTag() {
                                 <span className="tools pull-right">
                                     <button type="button" className="btn btn-round btn-primary tagAddBtn" onClick={startAddTag}>
                                         {txtButton}
+                                    </button>
+                                    <button type="button" className="btn btn-round btn-default tagAddBtn" onClick={fetchTag}>
+                                        Pesquisar
                                     </button>
                                 </span>
                             </header>

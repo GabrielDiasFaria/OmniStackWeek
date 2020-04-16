@@ -23,7 +23,7 @@ export default function EditTag(props) {
             onSubmit={event => {
                 event.preventDefault()
 
-                props.endEditRow(tag.id, tag)
+                props.endEditRow(tag._id, tag)
             }}
         >
             <FormTag tag={tag} handleInputChange={handleInputChange} typeChange="Editar Tag" />

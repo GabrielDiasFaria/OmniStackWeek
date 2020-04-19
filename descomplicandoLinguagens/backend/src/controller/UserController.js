@@ -36,7 +36,7 @@ module.exports = {
             function: req.body.function,
             profile: req.body.profile,
             email: req.body.email,
-            password: req.body.password,
+            password: "123",
             permission: {
                 posts: {
                     view: req.body.permission.posts.view,
@@ -52,6 +52,11 @@ module.exports = {
                     view: req.body.permission.categories.view,
                     update: req.body.permission.categories.update,
                     create: req.body.permission.categories.create
+                },
+                users: {
+                    view: req.body.permission.users.view,
+                    update: req.body.permission.users.update,
+                    create: req.body.permission.users.create
                 }
             }
         })
@@ -89,11 +94,14 @@ module.exports = {
                     view: req.body.permission.categories.view,
                     update: req.body.permission.categories.update,
                     create: req.body.permission.categories.create
+                },
+                users: {
+                    view: req.body.permission.users.view,
+                    update: req.body.permission.users.update,
+                    create: req.body.permission.users.create
                 }
             }
         }
-
-        user.password = generateHash(user.password)
 
         await UserSchema.updateOne(filter, update, (err, result) => {
             if (result.ok === 1)

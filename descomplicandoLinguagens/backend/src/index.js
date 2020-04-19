@@ -5,11 +5,13 @@ const cors = require('cors')
 
 const app = express()
 
-// Quando for para PRD -
-app.use(cors({
-    origin: 'http://descomplicandolinguagens.com.br'
-}))
-// app.use(cors())
+const corsOptions = {
+    // origin: 'http://descomplicandolinguagens.com.br',
+    exposedHeaders: 'x-total-count'
+};
+
+app.use(cors(corsOptions))
+
 app.use(express.json())
 app.use(routes)
 

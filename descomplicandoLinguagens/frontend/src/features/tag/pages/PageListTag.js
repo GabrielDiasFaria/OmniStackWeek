@@ -1,7 +1,9 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import SweetAlert from 'react-bootstrap-sweetalert'
 
 import api from '../../../services/api'
+import globalConfig from '../../../utils/globalConfig'
+import Pagination from '../../../components/Pagination'
 
 import Menu from '../../../components/menu/Menu'
 import ListTag from '../containers/ListTag'
@@ -14,57 +16,42 @@ export default function PageListTag() {
 
     const initialFormState = { _id: 0, name: '', description: '', slug: '' }
 
-    const [_id, setId] = useState('')
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('')
-    const [slug, setSlug] = useState('')
-    const data = {
-        _id,
-        name,
-        description,
-        slug
-    }
-
     const [tags, setTags] = useState([])
     const [currentTag, setCurrentTag] = useState(initialFormState)
     const [editing, setEditing] = useState(false)
     const [adding, setAdding] = useState(false)
+    const [deleting, setDeleting] = useState(false)
     const [msgAlert, setMsgAlert] = useState('')
     const [boolAlert, setBoolAlert] = useState(false)
     const [txtButton, setTxtButton] = useState('Adicionar')
+    const [currentPage, setCurrentPage] = useState(1)
+    const [loading, setLoading] = useState(false)
 
-    const fetchTag = async () => {
-        const response = await api.get('tags')
-        setTags(response.data)
-        // setTags([
-        //     { id: 1, name: 'SAP', description: 'Descrição aqui...', slug: 'SAP' },
-        //     { id: 2, name: 'ABAP', description: 'Descrição aqui...', slug: 'ABAP' },
-        //     { id: 3, name: 'ABAPS', description: 'Descrição aqui vai...', slug: 'ABAPS' }
-        // ])
-    }
+    useEffect(() => {
+        const fetchTag = async () => {
+            setLoading(true)
+            const response = await api.get('tags')
+            setTags(response.data)
+            setLoading(false)
+        }
+        fetchTag()
+    }, [editing, adding, deleting])
+
+    const indexOfLastPost = currentPage * globalConfig.maxPageRegisters
+    const indexOfFirstPost = indexOfLastPost - globalConfig.maxPageRegisters
+    const currentTags = tags.slice(indexOfFirstPost, indexOfLastPost)
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
     /** Delete Tag */
     const deleteTag = async id => {
-        setEditing(false)
-        // setTags(tags.filter(tag => tag.id !== id))
-        const response = await api.delete(`tags/${id}`)
+        setDeleting(true)
+        await api.delete(`tags/${id}`)
 
         setMsgAlert(`Tag (${id}) deletada com sucesso!`)
         showAlert()
-
-        fetchTag()
-    }
-
-    /** End New */
-    const endAddTag = async tag => {
-        setAdding(false)
-        const response = await api.post('tags', tag)
-
-        setMsgAlert(`Tag (${tag.id}) criada com sucesso!`)
-        showAlert()
-        setTxtButton('Adicionar')
-
-        fetchTag()
+        setCurrentPage(1)
+        setDeleting(false)
     }
 
     /** Start New */
@@ -79,6 +66,16 @@ export default function PageListTag() {
         }
     }
 
+    /** End New */
+    const endAddTag = async tag => {
+        await api.post('tags', tag)
+
+        setMsgAlert(`Tag (${tag.id}) criada com sucesso!`)
+        showAlert()
+        setTxtButton('Adicionar')
+        setAdding(false)
+    }
+
     /** Start Edit */
     const startEditRow = tag => {
         setEditing(true)
@@ -88,15 +85,12 @@ export default function PageListTag() {
 
     /** End Edit */
     const endEditRow = async (id, updatedTag) => {
-        setEditing(false)
-        // setTags(tags.map(tag => (tag.id === id ? updatedTag : tag)))
-        const response = await api.put(`tags/${id}`, updatedTag)
+        await api.put(`tags/${id}`, updatedTag)
 
         setMsgAlert(`Tag (${id}) modificada com sucesso!`)
         showAlert()
         setTxtButton('Adicionar')
-
-        fetchTag()
+        setEditing(false)
     }
 
     const hideAlert = () => {
@@ -126,17 +120,16 @@ export default function PageListTag() {
                                     <button type="button" className="btn btn-round btn-primary tagAddBtn" onClick={startAddTag}>
                                         {txtButton}
                                     </button>
-                                    <button type="button" className="btn btn-round btn-default tagAddBtn" onClick={fetchTag}>
-                                        Pesquisar
-                                    </button>
                                 </span>
                             </header>
                             <div className="panel-body">
-
                                 {
                                     editing ? (
                                         <Fragment>
-                                            <EditTag currentTag={currentTag} endEditRow={endEditRow} />
+                                            <EditTag
+                                                currentTag={currentTag}
+                                                endEditRow={endEditRow}
+                                            />
                                         </Fragment>
                                     ) : (false)
                                 }
@@ -152,7 +145,17 @@ export default function PageListTag() {
                                 {
                                     !editing && !adding ? (
                                         <Fragment>
-                                            <ListTag tags={tags} startEditRow={startEditRow} deleteTag={deleteTag} />
+                                            <ListTag
+                                                tags={currentTags}
+                                                startEditRow={startEditRow}
+                                                deleteTag={deleteTag}
+                                                loading={loading}
+                                            />
+                                            <Pagination
+                                                linesPerPage={globalConfig.maxPageRegisters}
+                                                totalLines={tags.length}
+                                                paginate={paginate}
+                                            />
                                         </Fragment>
                                     ) : (false)
                                 }
@@ -166,69 +169,3 @@ export default function PageListTag() {
 
     )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-// <div className="default_container">
-        //     {/* Menu Default */}
-        //     <header>
-        //         {Menu()}
-        //     </header>
-
-        //     {/* Page Tags */}
-        //     <div>
-
-        //         {/* Descrição da Page */}
-        //         <DescriptionPage description="Tags" />
-
-        //         <SweetAlert success show={boolAlert} title={msgAlert} onConfirm={hideAlert}>
-        //         </SweetAlert>
-
-        //         {/* <Link to="/Blog/new_tag" className="floatSquare">
-        //             Adicionar
-        //         </Link> */}
-        //         <button className="floatSquare" onClick={startAddTag}>
-        //             Adicionar
-        //         </button>
-
-        //         <hr />
-
-        //         <div className="mTop45px">
-
-        //             {
-        //                 editing ? (
-        //                     <Fragment>
-        //                         <EditTag currentTag={currentTag} endEditRow={endEditRow} />
-        //                     </Fragment>
-        //                 ) : (false)
-        //             }
-
-        //             {
-        //                 adding ? (
-        //                     <Fragment>
-        //                         <NewTag endAddTag={endAddTag} />
-        //                     </Fragment>
-        //                 ) : (false)
-        //             }
-
-        //             {
-        //                 !editing && !adding ? (
-        //                     <Fragment>
-        //                         <ListTag tags={tags} startEditRow={startEditRow} deleteTag={deleteTag} />
-        //                     </Fragment>
-        //                 ) : (false)
-        //             }
-
-        //         </div>
-
-        //     </div>
-        // </div>

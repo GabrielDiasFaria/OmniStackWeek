@@ -22,6 +22,11 @@ let UserSchema = new Schema({
             view: Boolean,
             update: Boolean,
             create: Boolean
+        },
+        users: {
+            view: Boolean,
+            update: Boolean,
+            create: Boolean
         }
     }
 });

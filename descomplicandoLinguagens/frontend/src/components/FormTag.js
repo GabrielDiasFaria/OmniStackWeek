@@ -7,7 +7,7 @@ export default function FormTag({ tag, handleInputChange, typeChange }) {
                 <h4>{typeChange}</h4>
                 <br />
 
-                <div className="form-group">
+                <div className="form-group dNone">
                     <label for="category_id" className="bmd-label-floating">#</label>
                     <input placeholder="Id" disabled name="id" className="form-control" id="category_id" value={tag.id} onChange={handleInputChange}></input>
                 </div>

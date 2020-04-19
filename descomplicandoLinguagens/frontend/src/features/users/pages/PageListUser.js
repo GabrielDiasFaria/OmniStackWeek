@@ -1,45 +1,86 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import SweetAlert from 'react-bootstrap-sweetalert'
+
+import api from '../../../services/api'
+import globalConfig from '../../../utils/globalConfig'
+import Pagination from '../../../components/Pagination'
 
 import Menu from '../../../components/menu/Menu'
 import ListUser from '../containers/ListUser'
-import EditUser from '../containers/EditUser'
 import NewUser from '../containers/NewUser'
+import EditUser from '../containers/EditUser'
+
 import '../styles/style_user.css'
 
 export default function PageListUser() {
 
-    const listUsers = [
-        {
-            id: 1,
-            avatar: '',
-            name: 'Gabriel',
-            function: 'ABAP Developer',
-            profile: 'Desenvolvedor',
-            email: 'gabriel@descomplicandolinguagens.com.br',
-            permission: {
-                post: { create: false, update: false, view: true },
-                tag: { create: false, update: false, view: true },
-                user: { create: false, update: false, view: true }
-            }
-        },
-    ]
-    const initialFormState = { id: 0, avatar: '', name: '', funcao: '', profile: '', email: '' }
-    const [users, setUsers] = useState(listUsers)
-    const [currentUser, setCurrentUser] = useState(initialFormState)
+    // const listUsers = [
+    //     {
+    //         id: 1,
+    //         avatar: '',
+    //         name: 'Gabriel',
+    //         function: 'ABAP Developer',
+    //         profile: 'Desenvolvedor',
+    //         email: 'gabriel@descomplicandolinguagens.com.br',
+    //         permission: {
+    //             posts: { create: false, update: false, view: true },
+    //             tags: { create: false, update: false, view: true },
+    //             categories: { create: false, update: false, view: false },
+    //             users: { create: false, update: false, view: true }
+    //         }
+    //     },
+    // ]
+    const initialFormState = {
+        id: 0,
+        avatar: '',
+        name: '',
+        funcao: '',
+        profile: '',
+        email: '',
+        permission: {
+            posts: { create: false, update: false, view: true },
+            tags: { create: false, update: false, view: true },
+            categories: { create: false, update: false, view: false },
+            users: { create: false, update: false, view: true }
+        }
+    }
 
+    const [users, setUsers] = useState([])
+    const [currentUser, setCurrentUser] = useState(initialFormState)
     const [boolAlert, setBoolAlert] = useState(false)
     const [msgAlert, setMsgAlert] = useState('')
     const [txtButton, setTxtButton] = useState('Adicionar')
     const [editing, setEditing] = useState(false)
     const [adding, setAdding] = useState(false)
+    const [deleting, setDeleting] = useState(false)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [loading, setLoading] = useState(false)
 
-    const hideAlert = () => {
-        setBoolAlert(false)
-    }
+    useEffect(() => {
+        const fetchUser = async () => {
+            setLoading(true)
+            const response = await api.get('users')
+            setUsers(response.data)
+            setLoading(false)
+        }
+        fetchUser()
+    }, [editing, adding, deleting])
 
-    const showAlert = () => {
-        setBoolAlert(true)
+    const indexOfLastPost = currentPage * globalConfig.maxPageRegisters
+    const indexOfFirstPost = indexOfLastPost - globalConfig.maxPageRegisters
+    const currentUsers = users.slice(indexOfFirstPost, indexOfLastPost)
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
+    /** Delete */
+    const deleteRegister = async id => {
+        setDeleting(true)
+        await api.delete(`users/${id}`)
+
+        setMsgAlert(`Usuário (${id}) deletado com sucesso!`)
+        showAlert()
+        setCurrentPage(1)
+        setDeleting(false)
     }
 
     /** Start New */
@@ -55,14 +96,13 @@ export default function PageListUser() {
     }
 
     /** End New */
-    const endAddUser = user => {
-        setAdding(false)
-        user.id = 0
-        setUsers([...users, user])
+    const endAddUser = async user => {
+        await api.post('users', user)
 
         setMsgAlert(`Usuário (${user.id}) criado com sucesso!`)
-        showAlert(true)
+        showAlert()
         setTxtButton('Adicionar')
+        setAdding(false)
     }
 
     /** Start Edit */
@@ -73,22 +113,21 @@ export default function PageListUser() {
     }
 
     /** End Edit */
-    const endEditRow = (id, updatedUser) => {
-        setEditing(false)
-        setUsers(users.map(user => (user.id === id ? updatedUser : user)))
+    const endEditRow = async (id, updatedUser) => {
+        await api.put(`users/${id}`, updatedUser)
 
         setMsgAlert(`Usuário (${id}) modificado com sucesso!`)
-        showAlert(true)
+        showAlert()
         setTxtButton('Adicionar')
+        setEditing(false)
     }
 
-    /** Delete */
-    const deleteRegister = id => {
-        setEditing(false)
-        setUsers(users.filter(user => user.id !== id))
+    const hideAlert = () => {
+        setBoolAlert(false)
+    }
 
-        setMsgAlert(`Usuário (${id}) deletado com sucesso!`)
-        showAlert(true)
+    const showAlert = () => {
+        setBoolAlert(true)
     }
 
     return (
@@ -116,7 +155,10 @@ export default function PageListUser() {
                                 {
                                     editing ? (
                                         <Fragment>
-                                            <EditUser currentUser={currentUser} endEditRow={endEditRow} />
+                                            <EditUser
+                                                currentUser={currentUser}
+                                                endEditRow={endEditRow}
+                                            />
                                         </Fragment>
                                     ) : (false)
                                 }
@@ -132,7 +174,17 @@ export default function PageListUser() {
                                 {
                                     !editing && !adding ? (
                                         <Fragment>
-                                            <ListUser list={users} startEditRow={startEditRow} deleteRegister={deleteRegister} />
+                                            <ListUser
+                                                list={currentUsers}
+                                                startEditRow={startEditRow}
+                                                deleteRegister={deleteRegister}
+                                                loading={loading}
+                                            />
+                                            <Pagination
+                                                linesPerPage={globalConfig.maxPageRegisters}
+                                                totalLines={users.length}
+                                                paginate={paginate}
+                                            />
                                         </Fragment>
                                     ) : (false)
                                 }

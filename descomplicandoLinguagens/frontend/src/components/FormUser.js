@@ -42,7 +42,8 @@ export default function FormUser({ user, handleInputChange, typeChange, handleIn
 
                             <div className="form-group">
                                 <label for="user_profile" className="bmd-label-floating">User - Profile</label>
-                                <input placeholder="Profile" type="" name="profile" className="form-control" id="user_profile" value={user.profile} onChange={handleInputChange}></input>
+                                {/* <input placeholder="Profile" type="" name="profile" className="form-control" id="user_profile" value={user.profile} onChange={handleInputChange}></input> */}
+                                <textarea placeholder="Profile" className="form-control" name="profile" id="user_profile" rows="3" value={user.profile} onChange={handleInputChange}></textarea>
                             </div>
 
                             <div className="form-group">
@@ -58,15 +59,15 @@ export default function FormUser({ user, handleInputChange, typeChange, handleIn
                             <label className="col-sm-1 control-label">Posts</label>
                             <div className="col-sm-2 icheck">
                                 <div className="checkbox single-row">
-                                    <input type="checkbox" name="post.view" checked={user.permission.post.view} value={user.permission.post.view} onChange={handleInputChangeCk} ></input>
+                                    <input type="checkbox" name="posts.view" checked={user.permission.posts.view} value={user.permission.posts.view} onChange={handleInputChangeCk} ></input>
                                     <label>View</label>
                                 </div>
                                 <div className="checkbox single-row">
-                                    <input type="checkbox" name="post.update" checked={user.permission.post.update} value={user.permission.post.update} onChange={handleInputChangeCk} ></input>
+                                    <input type="checkbox" name="posts.update" checked={user.permission.posts.update} value={user.permission.posts.update} onChange={handleInputChangeCk} ></input>
                                     <label>Update</label>
                                 </div>
                                 <div className="checkbox single-row">
-                                    <input type="checkbox" name="post.create" checked={user.permission.post.create} value={user.permission.post.create} onChange={handleInputChangeCk} ></input>
+                                    <input type="checkbox" name="posts.create" checked={user.permission.posts.create} value={user.permission.posts.create} onChange={handleInputChangeCk} ></input>
                                     <label>Create</label>
                                 </div>
                             </div>
@@ -77,15 +78,34 @@ export default function FormUser({ user, handleInputChange, typeChange, handleIn
                             <label className="col-sm-1 control-label">Tags</label>
                             <div className="col-sm-2 icheck">
                                 <div className="checkbox single-row">
-                                    <input type="checkbox" name="tag.view" checked={user.permission.tag.view} value={user.permission.tag.view} onChange={handleInputChangeCk} ></input>
+                                    <input type="checkbox" name="tags.view" checked={user.permission.tags.view} value={user.permission.tags.view} onChange={handleInputChangeCk} ></input>
                                     <label>View</label>
                                 </div>
                                 <div className="checkbox single-row">
-                                    <input type="checkbox" name="tag.update" checked={user.permission.tag.update} value={user.permission.tag.update} onChange={handleInputChangeCk} ></input>
+                                    <input type="checkbox" name="tags.update" checked={user.permission.tags.update} value={user.permission.tags.update} onChange={handleInputChangeCk} ></input>
                                     <label>Update</label>
                                 </div>
                                 <div className="checkbox single-row">
-                                    <input type="checkbox" name="tag.create" checked={user.permission.tag.create} value={user.permission.tag.create} onChange={handleInputChangeCk} ></input>
+                                    <input type="checkbox" name="tags.create" checked={user.permission.tags.create} value={user.permission.tags.create} onChange={handleInputChangeCk} ></input>
+                                    <label>Create</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Categorias */}
+                        <div className="form-group">
+                            <label className="col-sm-1 control-label">Categories</label>
+                            <div className="col-sm-2 icheck">
+                                <div className="checkbox single-row">
+                                    <input type="checkbox" name="categories.view" checked={user.permission.categories.view} value={user.permission.categories.view} onChange={handleInputChangeCk} ></input>
+                                    <label>View</label>
+                                </div>
+                                <div className="checkbox single-row">
+                                    <input type="checkbox" name="categories.update" checked={user.permission.categories.update} value={user.permission.categories.update} onChange={handleInputChangeCk} ></input>
+                                    <label>Update</label>
+                                </div>
+                                <div className="checkbox single-row">
+                                    <input type="checkbox" name="categories.create" checked={user.permission.categories.create} value={user.permission.categories.create} onChange={handleInputChangeCk} ></input>
                                     <label>Create</label>
                                 </div>
                             </div>
@@ -96,15 +116,15 @@ export default function FormUser({ user, handleInputChange, typeChange, handleIn
                             <label className="col-sm-1 control-label">Users</label>
                             <div className="col-sm-2 icheck">
                                 <div className="checkbox single-row">
-                                    <input type="checkbox" name="user.view" checked={user.permission.user.view} value={user.permission.user.view} onChange={handleInputChangeCk} ></input>
+                                    <input type="checkbox" name="users.view" checked={user.permission.users.view} value={user.permission.users.view} onChange={handleInputChangeCk} ></input>
                                     <label>View</label>
                                 </div>
                                 <div className="checkbox single-row">
-                                    <input type="checkbox" name="user.update" checked={user.permission.user.update} value={user.permission.user.update} onChange={handleInputChangeCk} ></input>
+                                    <input type="checkbox" name="users.update" checked={user.permission.users.update} value={user.permission.users.update} onChange={handleInputChangeCk} ></input>
                                     <label>Update</label>
                                 </div>
                                 <div className="checkbox single-row">
-                                    <input type="checkbox" name="user.create" checked={user.permission.user.create} value={user.permission.user.create} onChange={handleInputChangeCk} ></input>
+                                    <input type="checkbox" name="users.create" checked={user.permission.users.create} value={user.permission.users.create} onChange={handleInputChangeCk} ></input>
                                     <label>Create</label>
                                 </div>
                             </div>

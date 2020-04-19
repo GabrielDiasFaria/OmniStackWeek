@@ -4,7 +4,7 @@ import FormPost from '../../../components/FormPost'
 
 export default function NewPost(props) {
 
-    const initialFormState = { id: 0, description: '', tag: '', category: '', html: '' }
+    const initialFormState = { id: 0, description: '', tag: 'SAP', category: '', html: '' }
     const [post, setPost] = useState(initialFormState)
 
     const editorInputChange = event => {
@@ -14,6 +14,10 @@ export default function NewPost(props) {
     const handleInputChange = event => {
         const { name, value } = event.target
 
+        setPost({ ...post, [name]: value })
+    }
+
+    const handleDropChange = (value, name) => {
         setPost({ ...post, [name]: value })
     }
 
@@ -35,7 +39,7 @@ export default function NewPost(props) {
                 </div>
 
                 <div className="col-sm-4">
-                    <FormPost post={post} handleInputChange={handleInputChange} typeChange="Editar Post" />
+                    <FormPost post={post} handleDropChange={handleDropChange} handleInputChange={handleInputChange} typeChange="Editar Post" />
                 </div>
 
             </div>

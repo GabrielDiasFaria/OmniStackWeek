@@ -30,34 +30,44 @@ export default function EditUser(props) {
         }
 
         switch (name) {
-            case 'post.view':
-                modifiedUser.permission.post.view = value
+            case 'posts.view':
+                modifiedUser.permission.posts.view = value
                 break
-            case 'post.create':
-                modifiedUser.permission.post.create = value
+            case 'posts.create':
+                modifiedUser.permission.posts.create = value
                 break
-            case 'post.update':
-                modifiedUser.permission.post.update = value
-                break
-
-            case 'tag.view':
-                modifiedUser.permission.tag.view = value
-                break
-            case 'tag.create':
-                modifiedUser.permission.tag.create = value
-                break
-            case 'tag.update':
-                modifiedUser.permission.tag.update = value
+            case 'posts.update':
+                modifiedUser.permission.posts.update = value
                 break
 
-            case 'user.view':
-                modifiedUser.permission.user.view = value
+            case 'tags.view':
+                modifiedUser.permission.tags.view = value
                 break
-            case 'user.create':
-                modifiedUser.permission.user.create = value
+            case 'tags.create':
+                modifiedUser.permission.tags.create = value
                 break
-            case 'user.update':
-                modifiedUser.permission.user.update = value
+            case 'tags.update':
+                modifiedUser.permission.tags.update = value
+                break
+
+            case 'categories.view':
+                modifiedUser.permission.categories.view = value
+                break
+            case 'categories.create':
+                modifiedUser.permission.categories.create = value
+                break
+            case 'categories.update':
+                modifiedUser.permission.categories.update = value
+                break
+
+            case 'users.view':
+                modifiedUser.permission.users.view = value
+                break
+            case 'users.create':
+                modifiedUser.permission.users.create = value
+                break
+            case 'users.update':
+                modifiedUser.permission.users.update = value
                 break
             default:
                 break
@@ -72,7 +82,7 @@ export default function EditUser(props) {
             onSubmit={event => {
                 event.preventDefault()
 
-                props.endEditRow(user.id, user)
+                props.endEditRow(user._id, user)
             }}
         >
             <FormUser user={user} handleInputChangeCk={handleInputChangeCk} handleInputChange={handleInputChange} typeChange="Editar Usuário" />

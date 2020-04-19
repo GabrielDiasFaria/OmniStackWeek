@@ -1,7 +1,19 @@
 import React from 'react'
 import { FiTrash, FiEdit } from 'react-icons/fi'
 
-export default function ListCategory({ list, startEditRow, deleteRegister }) {
+export default function ListCategory(
+    {
+        list,
+        startEditRow,
+        deleteRegister,
+        loading
+    }) {
+
+    if (loading) {
+        return (
+            <div className="spinner"></div>
+        )
+    }
 
     return (
         <table className="table table-hover table-striped" >
@@ -19,8 +31,8 @@ export default function ListCategory({ list, startEditRow, deleteRegister }) {
                 {
                     list.length > 0 ? (
                         list.map(line => (
-                            <tr key={line.id}>
-                                <td>{line.id}</td>
+                            <tr key={line._id}>
+                                <td>{line._id}</td>
                                 <td>{line.name}</td>
                                 <td>{line.description}</td>
                                 <td>{line.slug}</td>
@@ -30,7 +42,7 @@ export default function ListCategory({ list, startEditRow, deleteRegister }) {
                                     </button>
                                 </td>
                                 <td>
-                                    <button onClick={() => { deleteRegister(line.id) }} className="btn icon_default">
+                                    <button onClick={() => { deleteRegister(line._id) }} className="btn icon_default">
                                         <FiTrash size={16} />
                                     </button>
                                 </td>

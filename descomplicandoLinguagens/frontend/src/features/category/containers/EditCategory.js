@@ -23,7 +23,7 @@ export default function ListCategory(props) {
             onSubmit={event => {
                 event.preventDefault()
 
-                props.endEditRow(category.id, category)
+                props.endEditRow(category._id, category)
             }}
         >
             <FormCategory category={category} handleInputChange={handleInputChange} typeChange="Editar Categoria" />

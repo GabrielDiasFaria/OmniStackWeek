@@ -1,44 +1,58 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import SweetAlert from 'react-bootstrap-sweetalert'
 
+import api from '../../../services/api'
+import globalConfig from '../../../utils/globalConfig'
+import Pagination from '../../../components/Pagination'
+
 import Menu from '../../../components/menu/Menu'
+import ListPost from '../containers/ListPost'
 import NewPost from '../containers/NewPost'
 import EditorPost from '../containers/EditPost'
-import ListCategory from '../containers/ListPost'
-
 
 export default function PageListPost() {
 
-    const listPosts = [
-        { id: 1, description: 'Tabela SM30', tag: 'SAP, ABAP', category: 'SAP', html: '<h1>Ae&nbsp;</h1><p> Teste</p>' },
-    ]
+    // const listPosts = [
+    //     { id: 1, description: 'Tabela SM30', tag: 'SAP, ABAP', category: 'SAP', html: '<h1>Ae&nbsp;</h1><p> Teste</p>' },
+    // ]
     const initialFormState = { id: 0, description: '', tag: '', category: '', html: '' }
 
-    const [posts, setPosts] = useState(listPosts)
+    const [posts, setPosts] = useState([])
     const [currentPost, setCurrentPost] = useState(initialFormState)
-
-    // const [post, setPost] = useState('<h1>Ae&nbsp;</h1><p> Teste</p>')
     const [boolAlert, setBoolAlert] = useState(false)
     const [msgAlert, setMsgAlert] = useState('')
     const [editing, setEditing] = useState(false)
     const [adding, setAdding] = useState(false)
+    const [deleting, setDeleting] = useState(false)
     const [txtButton, setTxtButton] = useState('Adicionar')
+    const [currentPage, setCurrentPage] = useState(1)
+    const [loading, setLoading] = useState(false)
 
-    const hideAlert = () => {
-        setBoolAlert(false)
-    }
+    useEffect(() => {
+        const fetchTag = async () => {
+            setLoading(true)
+            const response = await api.get('posts')
+            setPosts(response.data)
+            setLoading(false)
+        }
+        fetchTag()
+    }, [editing, adding, deleting])
 
-    const showAlert = () => {
-        setBoolAlert(true)
-    }
+    const indexOfLastPost = currentPage * globalConfig.maxPageRegisters
+    const indexOfFirstPost = indexOfLastPost - globalConfig.maxPageRegisters
+    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
     /** Delete */
-    const deleteRegister = id => {
-        setEditing(false)
-        setPosts(posts.filter(post => post.id !== id))
+    const deleteRegister = async id => {
+        setDeleting(true)
+        await api.delete(`posts/${id}`)
 
         setMsgAlert(`Post (${id}) deletado com sucesso!`)
-        showAlert(true)
+        showAlert()
+        setCurrentPage(1)
+        setDeleting(false)
     }
 
     /** Start New */
@@ -54,14 +68,15 @@ export default function PageListPost() {
     }
 
     /** End New */
-    const endAddPost = post => {
-        setAdding(false)
-        post.id = 0
-        setPosts([...posts, post])
+    const endAddPost = async post => {
+        await api.post('posts', post, {
+            headers: { Authorization: '1' }
+        })
 
         setMsgAlert(`Post (${post.id}) criadao com sucesso!`)
-        showAlert(true)
+        showAlert()
         setTxtButton('Adicionar')
+        setAdding(false)
     }
 
     /** Start Edit */
@@ -72,13 +87,21 @@ export default function PageListPost() {
     }
 
     /** End Edit */
-    const endEditRow = (id, updatedPost) => {
-        setEditing(false)
-        setPosts(posts.map(post => (post.id === id ? updatedPost : post)))
+    const endEditRow = async (id, updatedPost) => {
+        await api.put(`posts/${id}`, updatedPost)
 
         setMsgAlert(`Post (${id}) modificado com sucesso!`)
-        showAlert(true)
+        showAlert()
         setTxtButton('Adicionar')
+        setEditing(false)
+    }
+
+    const hideAlert = () => {
+        setBoolAlert(false)
+    }
+
+    const showAlert = () => {
+        setBoolAlert(true)
     }
 
     return (
@@ -107,7 +130,10 @@ export default function PageListPost() {
                                 {
                                     editing ? (
                                         <Fragment>
-                                            <EditorPost post={currentPost} endEditRow={endEditRow} />
+                                            <EditorPost
+                                                post={currentPost}
+                                                endEditRow={endEditRow}
+                                            />
                                         </Fragment>
                                     ) : (false)
                                 }
@@ -123,11 +149,20 @@ export default function PageListPost() {
                                 {
                                     !editing && !adding ? (
                                         <Fragment>
-                                            <ListCategory list={posts} startEditRow={startEditRow} deleteRegister={deleteRegister} />
+                                            <ListPost
+                                                list={currentPosts}
+                                                startEditRow={startEditRow}
+                                                deleteRegister={deleteRegister}
+                                                loading={loading}
+                                            />
+                                            <Pagination
+                                                linesPerPage={globalConfig.maxPageRegisters}
+                                                totalLines={posts.length}
+                                                paginate={paginate}
+                                            />
                                         </Fragment>
                                     ) : (false)
                                 }
-                                {/* <EditorPost post={post} setPost={setPost} /> */}
                             </div>
                         </section>
                     </div>

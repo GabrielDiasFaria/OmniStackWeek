@@ -23,12 +23,16 @@ export default function EditPost(props) {
         setPost({ ...post, [name]: value })
     }
 
+    const handleDropChange = (value, name) => {
+        setPost({ ...post, [name]: value })
+    }
+
     return (
         <form className="col-sm-12"
             onSubmit={event => {
                 event.preventDefault()
 
-                props.endEditRow(post.id, post)
+                props.endEditRow(post._id, post)
             }}
         >
             <div className="row">
@@ -36,11 +40,12 @@ export default function EditPost(props) {
                     <CKEditor
                         data={post.html}
                         // type="inline"
-                        onChange={editorInputChange} />
+                        onChange={editorInputChange}
+                    />
                 </div>
 
                 <div className="col-sm-4">
-                    <FormPost post={post} handleInputChange={handleInputChange} typeChange="Editar Post" />
+                    <FormPost post={post} handleDropChange={handleDropChange} handleInputChange={handleInputChange} typeChange="Editar Post" />
                 </div>
             </div>
 

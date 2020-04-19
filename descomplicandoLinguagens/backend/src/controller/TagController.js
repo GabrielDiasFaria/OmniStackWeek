@@ -3,12 +3,21 @@ var TagSchema = require('../model/TagModel');
 module.exports = {
 
     async list(req, res) {
-        await TagSchema.find((err, object) => {
-            if (err)
-                return res.send(err)
-            else
-                return res.send(object)
-        })
+        //Link http://localhost:21262/tags?page=1&limit=2
+        let { page = 1, limit = 99999999 } = req.query
+        page--
+        await TagSchema.find()
+            .skip(parseInt(page))
+            .limit(parseInt(limit))
+            .exec(async (err, object) => {
+                if (err)
+                    return res.send(err)
+
+                const countRegs = await TagSchema.countDocuments().exec((err, count) => {
+                    res.header('X-Total-Count', count)
+                    return res.send(object)
+                })
+            })
     },
 
     async details(req, res) {
@@ -64,3 +73,11 @@ module.exports = {
     }
 
 }
+
+
+// await TagSchema.find((err, object) => {
+        //     if (err)
+        //         return res.send(err)
+        //     else
+        //         return res.send(object)
+        // })

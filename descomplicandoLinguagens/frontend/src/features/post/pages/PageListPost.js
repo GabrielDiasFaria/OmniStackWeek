@@ -12,10 +12,7 @@ import EditorPost from '../containers/EditPost'
 
 export default function PageListPost() {
 
-    // const listPosts = [
-    //     { id: 1, description: 'Tabela SM30', tag: 'SAP, ABAP', category: 'SAP', html: '<h1>Ae&nbsp;</h1><p> Teste</p>' },
-    // ]
-    const initialFormState = { id: 0, description: '', tag: '', category: '', html: '' }
+    const initialFormState = { id: 0, title: '', description: '', tag: '', category: '', html: '', image: '' }
 
     const [posts, setPosts] = useState([])
     const [currentPost, setCurrentPost] = useState(initialFormState)
@@ -27,15 +24,16 @@ export default function PageListPost() {
     const [txtButton, setTxtButton] = useState('Adicionar')
     const [currentPage, setCurrentPage] = useState(1)
     const [loading, setLoading] = useState(false)
+    const user_Id = localStorage.getItem('user_Id')
 
     useEffect(() => {
-        const fetchTag = async () => {
+        const fetchPosts = async () => {
             setLoading(true)
             const response = await api.get('posts')
             setPosts(response.data)
             setLoading(false)
         }
-        fetchTag()
+        fetchPosts()
     }, [editing, adding, deleting])
 
     const indexOfLastPost = currentPage * globalConfig.maxPageRegisters
@@ -69,9 +67,11 @@ export default function PageListPost() {
 
     /** End New */
     const endAddPost = async post => {
-        await api.post('posts', post, {
-            headers: { Authorization: '1' }
+        const response = await api.post('posts', post, {
+            headers: { Authorization: user_Id }
         })
+
+        console.log(response.data.message)
 
         setMsgAlert(`Post (${post.id}) criadao com sucesso!`)
         showAlert()
@@ -88,7 +88,10 @@ export default function PageListPost() {
 
     /** End Edit */
     const endEditRow = async (id, updatedPost) => {
-        await api.put(`posts/${id}`, updatedPost)
+
+        await api.put(`posts/${id}`, updatedPost, {
+            headers: { Authorization: user_Id }
+        })
 
         setMsgAlert(`Post (${id}) modificado com sucesso!`)
         showAlert()
@@ -120,7 +123,7 @@ export default function PageListPost() {
                             <header className="panel-heading">
                                 Lista de Post
                                 <span className="tools pull-right">
-                                    <button type="button" className="btn btn-round btn-primary tagAddBtn" onClick={startAddPost}>
+                                    <button type="button" className="btn btn-round btn-warning tagAddBtn" onClick={startAddPost}>
                                         {txtButton}
                                     </button>
                                 </span>

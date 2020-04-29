@@ -85,7 +85,12 @@ export default function EditUser(props) {
                 props.endEditRow(user._id, user)
             }}
         >
-            <FormUser user={user} handleInputChangeCk={handleInputChangeCk} handleInputChange={handleInputChange} typeChange="Editar Usuário" />
+            <FormUser
+                user={user}
+                handleInputChangeCk={handleInputChangeCk}
+                handleInputChange={handleInputChange}
+                resetPassword={props.resetPassword}
+            />
         </form>
     )
 }

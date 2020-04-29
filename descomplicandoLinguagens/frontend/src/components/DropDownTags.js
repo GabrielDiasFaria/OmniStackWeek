@@ -1,7 +1,7 @@
 import React from 'react';
 import api from '../services/api'
 
-export default function DropDownTags({ currentValue, handleDropChange }) {
+export default function DropDownTags({ currentValue, handleDropChange, textHelp }) {
 
     const [loading, setLoading] = React.useState(true);
     const [items, setItems] = React.useState([
@@ -20,11 +20,11 @@ export default function DropDownTags({ currentValue, handleDropChange }) {
 
     React.useEffect(() => {
         handleDropChange(value, 'tag')
-    }, [value])
+    }, [])
 
     return (
         <div class="form-group">
-            <label className="control-label">Post - Tag</label>
+            <label className="control-label">{textHelp}</label>
             <div className="">
                 <select
                     className="form-control"

@@ -2,7 +2,15 @@ var UserSchema = require('../model/UserModel');
 var bcrypt = require('bcrypt');
 
 function generateHash(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+    // let hash = bcrypt.hashSync(password, 10)
+    // return hash
+    return password
+}
+
+function compareHash(password, hash) {
+    if (password === hash)
+        return true;
+    return false;
 }
 
 module.exports = {
@@ -14,6 +22,11 @@ module.exports = {
             else
                 return res.send(object)
         })
+    },
+
+    async listAll() {
+        return await (await UserSchema.find((err, object) => { }))
+        // return await (await UserSchema.findById(id, (err, object) => { }))
     },
 
     async details(req, res) {
@@ -30,6 +43,30 @@ module.exports = {
         return await (await UserSchema.findById(id, (err, object) => { }))
     },
 
+    async validateUser(req, res) {
+        let hash = generateHash(req.body.password)
+        await UserSchema.find((err, object) => {
+            if (err)
+                return res.send(err)
+            else
+                return res.send(object)
+        }).where({ email: req.body.email, password: hash })
+    },
+
+    async resetPassword(req, res) {
+        let password = generateHash("123")
+
+        const filter = { _id: req.params.id };
+        const update = { password: password }
+
+        await UserSchema.updateOne(filter, update, (err, result) => {
+            if (result.ok === 1)
+                return res.send({ status: "Registro modificado com sucesso!" })
+            else
+                return res.send(err)
+        })
+    },
+
     async create(req, res) {
         let user = new UserSchema({
             name: req.body.name,
@@ -37,6 +74,7 @@ module.exports = {
             profile: req.body.profile,
             email: req.body.email,
             password: "123",
+            avatar: req.body.avatar,
             permission: {
                 posts: {
                     view: req.body.permission.posts.view,
@@ -79,6 +117,7 @@ module.exports = {
             profile: req.body.profile,
             email: req.body.email,
             password: req.body.password,
+            avatar: req.body.avatar,
             permission: {
                 posts: {
                     view: req.body.permission.posts.view,

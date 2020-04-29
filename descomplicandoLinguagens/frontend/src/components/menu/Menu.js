@@ -1,15 +1,36 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom'
 import { FiChevronDown, FiBell, FiKey, FiMenu } from 'react-icons/fi'
 
 import logoImg from '../../_assets/img/Logo-Descomplicando-Linguagens.png'
-import logoAvatar from '../../_assets/img/avatar.jpg'
 
 import './style.css'
 
 export default function Menu({ activeOption }) {
 
-    let actvBlogPost, actvDashboard, actvTag, actvUser, actvCategory, actvPost = ''
+    let actvDashboard, actvTag, actvUser, actvCategory, actvPost = ''
+    const user_Name = localStorage.getItem('user_Name')
+    const user_Avatar = localStorage.getItem('user_Avatar')
+    const history = useHistory()
+
+    useEffect(() => {
+        function validateSession() {
+            if (user_Name === "" || !user_Name) {
+                history.push('/Blog')
+            }
+        }
+        validateSession()
+    }, [user_Name, history])
+
+    const loggout = (e) => {
+        e.preventDefault()
+        localStorage.setItem('user_Id', "")
+        localStorage.setItem('user_Name', "")
+        localStorage.setItem('user_Email', "")
+        localStorage.setItem('user_Avatar', "")
+
+        history.push('/Blog')
+    }
 
     switch (activeOption) {
         case "Dashboard":
@@ -67,7 +88,7 @@ export default function Menu({ activeOption }) {
                                 </ul>
                             </li>
                             <li>
-                                <Link to="/Blog/Dashboard" className="colorWhite">
+                                <Link to="/Blog/ListMidia" className="colorWhite">
                                     Mídias
                                 </Link>
                             </li>
@@ -106,13 +127,13 @@ export default function Menu({ activeOption }) {
 
                             <li className="dropdown">
                                 <a data-toggle="dropdown" className="dropdown-toggle" href="/">
-                                    <img alt="" src={logoAvatar}></img>
-                                    <span className="username"> Gabriel Dias</span>
+                                    <img alt="" src={user_Avatar}></img>
+                                    <span className="username"> {user_Name}</span>
                                     <b className="caret"></b>
                                 </a>
                                 <ul className="dropdown-menu extended logout">
                                     <li><a href="/"><FiBell /> Notificações <span className="badge bg-success">8</span></a></li>
-                                    <li><a href="/"><FiKey /> Log Out</a></li>
+                                    <li><a href="/" onClick={e => { loggout(e) }}><FiKey /> Log Out</a></li>
                                 </ul>
                             </li>
 
@@ -124,77 +145,5 @@ export default function Menu({ activeOption }) {
 
             </header>
         </section>
-        // <div className="pos-f-t">
-        //     {/* navbar-expand-lg -> Basta colocar para começar com aberto */}
-        //     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        //         <div>
-        //             <img className="navbar-brand brand_logo" src={logoImg} alt="Descomplicando L"></img>
-        //         </div>
-
-        //         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        //             <span className="navbar-toggler-icon"></span>
-        //         </button>
-        //         <div className="collapse navbar-collapse w-100 order-1 order-md-0" id="navbarNav">
-        //             <Link to="/Blog/Dashboard" className="btn btn-sm profile_navLink">
-        //                 Dashboard
-        //             </Link>
-        //             <div className="dropdown dropleft">
-        //                 <button className="btn dropdown-toggle btn-sm profile_navLink" type="button" id="dropBlogpost" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        //                     Blogposts
-        //                 </button>
-        //                 <div className="dropdown-menu" aria-labelledby="dropBlogpost">
-        //                     <p className="dropdown-item" >
-        //                         <Link to="/Blog/Posts" className="drop_item">
-        //                             POSTS
-        //                         </Link>
-        //                     </p>
-        //                     <p className="dropdown-item" >
-        //                         <Link to="/Blog/ListCategory" className="drop_item">
-        //                             CATEGORIAS
-        //                         </Link>
-        //                     </p>
-        //                     <p className="dropdown-item" >
-        //                         <Link to="/Blog/ListTag" className="drop_item">
-        //                             TAGS
-        //                         </Link>
-        //                     </p>
-        //                 </div>
-        //             </div>
-        //             <Link to="/Blog/Midias" className="btn btn-sm profile_navLink">
-        //                 Mídias
-        //             </Link>
-        //             <Link to="/Blog/Pages" className="btn btn-sm profile_navLink">
-        //                 Páginas
-        //             </Link>
-        //             <Link to="/Blog/Plugins" className="btn btn-sm profile_navLink">
-        //                 Plugins
-        //             </Link>
-        //             <Link to="/Blog/Users" className="btn btn-sm profile_navLink">
-        //                 Usuários
-        //             </Link>
-        //             <Link to="/Blog/Configuration" className="btn btn-sm profile_navLink">
-        //                 Configuração
-        //             </Link>
-        //         </div>
-        //         <div className="collapse navbar-collapse text-md-right">
-
-        //             <div className="dropdown dropleft">
-        //                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        //                     <FiBell size={16} className="profileFiBell" />
-        //                 </button>
-        //                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        //                     <p className="dropdown-item" >Action 1</p>
-        //                     <p className="dropdown-item" >Action 2</p>
-        //                     <p className="dropdown-item" >Action 3</p>
-        //                 </div>
-        //             </div>
-
-        //             <button className="btn profile_title_user">
-        //                 <p className="profile_title_font">Olá, Gabriel <FiUser size={20} className="profile_navLink_Icon" /></p>
-        //             </button>
-
-        //         </div>
-        //     </nav>
-        // </div>
     )
 }

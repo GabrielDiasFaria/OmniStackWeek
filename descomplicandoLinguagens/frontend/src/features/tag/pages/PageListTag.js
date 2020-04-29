@@ -117,7 +117,7 @@ export default function PageListTag() {
                             <header className="panel-heading">
                                 Lista de Tags
                                 <span className="tools pull-right">
-                                    <button type="button" className="btn btn-round btn-primary tagAddBtn" onClick={startAddTag}>
+                                    <button type="button" className="btn btn-round btn-warning tagAddBtn" onClick={startAddTag}>
                                         {txtButton}
                                     </button>
                                 </span>

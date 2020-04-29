@@ -14,22 +14,6 @@ import '../styles/style_user.css'
 
 export default function PageListUser() {
 
-    // const listUsers = [
-    //     {
-    //         id: 1,
-    //         avatar: '',
-    //         name: 'Gabriel',
-    //         function: 'ABAP Developer',
-    //         profile: 'Desenvolvedor',
-    //         email: 'gabriel@descomplicandolinguagens.com.br',
-    //         permission: {
-    //             posts: { create: false, update: false, view: true },
-    //             tags: { create: false, update: false, view: true },
-    //             categories: { create: false, update: false, view: false },
-    //             users: { create: false, update: false, view: true }
-    //         }
-    //     },
-    // ]
     const initialFormState = {
         id: 0,
         avatar: '',
@@ -81,6 +65,15 @@ export default function PageListUser() {
         showAlert()
         setCurrentPage(1)
         setDeleting(false)
+    }
+
+    const resetPassword = async id => {
+        let response = await api.put(`resetUserPass/${id}`)
+
+        setMsgAlert(response.data.status)
+        showAlert()
+        setCurrentPage(1)
+        setEditing(false)
     }
 
     /** Start New */
@@ -146,7 +139,7 @@ export default function PageListUser() {
                             <header className="panel-heading">
                                 Lista de Usuários
                                 <span className="tools pull-right">
-                                    <button type="button" className="btn btn-round btn-primary tagAddBtn" onClick={startAddUser}>
+                                    <button type="button" className="btn btn-round btn-warning tagAddBtn" onClick={startAddUser}>
                                         {txtButton}
                                     </button>
                                 </span>
@@ -158,6 +151,7 @@ export default function PageListUser() {
                                             <EditUser
                                                 currentUser={currentUser}
                                                 endEditRow={endEditRow}
+                                                resetPassword={resetPassword}
                                             />
                                         </Fragment>
                                     ) : (false)

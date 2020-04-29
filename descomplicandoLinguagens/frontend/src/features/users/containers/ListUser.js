@@ -1,8 +1,6 @@
 import React from 'react'
 import { FiTrash, FiEdit } from 'react-icons/fi'
 
-import logoAvatar from '../../../_assets/img/avatar.jpg'
-
 export default function ListUser(
     {
         list,
@@ -38,7 +36,7 @@ export default function ListUser(
                             list.map(line => (
                                 <tr key={line._id}>
                                     <td>{line._id}</td>
-                                    <td><img src={logoAvatar} alt="User Img" /></td>
+                                    <td><img src={line.avatar} alt="User Img" width="50" height="50" /></td>
                                     <td>{line.name}</td>
                                     <td>{line.function}</td>
                                     <td>{line.profile}</td>

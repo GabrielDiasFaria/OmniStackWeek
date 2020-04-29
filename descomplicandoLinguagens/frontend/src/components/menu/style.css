@@ -8,6 +8,25 @@
 
 .colorWhite{
     color: #FFF;
+    /* background-color: #FCB322; */
+    transition: filter 0.5s;
+}
+
+.colorWhite:hover{
+    filter: brightness(70%);
+    /* background-color: #FCB322; */
+    color: #FFF;
+    /* font-size: large; */
+}
+
+.full-width .nav>li>a:hover,.full-width .nav li.active a,.full-width .nav li.dropdown a:hover,.full-width .nav li.dropdown.open a:focus,.full-width .nav .open>a,.full-width .nav .open>a:hover,.full-width .nav .open>a:focus {
+    background-color: #FCB322;
+    text-decoration:none;
+    color:#fff;
+    transition:all 0.3s ease 0s;
+    -webkit-transition:all 0.3s ease 0s;
+    border-radius:30px;
+    -webkit-border-radius:30px;
 }
 
 /* .profile_logout_button {

@@ -4,7 +4,7 @@ import FormPost from '../../../components/FormPost'
 
 export default function NewPost(props) {
 
-    const initialFormState = { id: 0, description: '', tag: 'SAP', category: '', html: '' }
+    const initialFormState = { id: 0, title: '', description: '', tag: 'SAP', category: 'ABAP', html: '', image: '' }
     const [post, setPost] = useState(initialFormState)
 
     const editorInputChange = event => {

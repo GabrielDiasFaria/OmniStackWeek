@@ -8,12 +8,13 @@
 
 .divider {
   border-left: 1px solid #FFF;
-  top: 50px;
+  top: 30px;
 } 
 
 .session_form{
     margin-top: 25%;
     text-align: center;
+    margin-left: 100px;
 }
 
 .session_form input{
@@ -30,15 +31,16 @@
 .session_form h1{
     color: #FFF;
     font-size: 20px;
+    margin-left: -170px;
 }
 
 .session_form button{
     height: 30px;
     color: #333;
-    border: 1px solid #09F4C4;
+    border: 1px solid #FCB322;
     border-radius: 77px;
     padding: 0 24px;
-    background-color: #09F4C4;
+    background-color: #FCB322;
     font-size: 12px;
     transition: filter 0.5s;
     width: 100%;
@@ -56,7 +58,7 @@
 
 .session_logo img{
     max-width: 300px;
-    margin-top: 25%; 
+    margin-top: 20%; 
 }
 
 .session_link{
@@ -70,6 +72,6 @@
 }
 
 .session_link_icon{
-    color: #09F4C4;
+    color: #FCB322;
     margin-right: 5px;
 }

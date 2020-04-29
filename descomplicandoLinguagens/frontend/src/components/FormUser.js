@@ -1,23 +1,17 @@
 import React from 'react';
 
-export default function FormUser({ user, handleInputChange, typeChange, handleInputChangeCk }) {
+export default function FormUser({ user, handleInputChange, handleInputChangeCk, resetPassword }) {
 
     return (
 
         <section className="panel">
-            {/* <h4>{typeChange}</h4>
-            <br /> */}
             <header className="panel-heading tab-bg-dark-navy-blue">
                 <ul className="nav nav-tabs nav-justified ">
                     <li className="active">
-                        <a data-toggle="tab" href="#general">
-                            Dados Gerais
-                                </a>
+                        <a data-toggle="tab" href="#general">Dados Gerais</a>
                     </li>
                     <li>
-                        <a data-toggle="tab" href="#permission">
-                            Permissões
-                                </a>
+                        <a data-toggle="tab" href="#permission">Permissões</a>
                     </li>
                 </ul>
             </header>
@@ -27,7 +21,7 @@ export default function FormUser({ user, handleInputChange, typeChange, handleIn
                         <div className="position-center">
                             <div className="form-group">
                                 <label for="user_id" className="bmd-label-floating">#</label>
-                                <input placeholder="Id" disabled name="id" className="form-control" id="user_id" value={user.id} onChange={handleInputChange}></input>
+                                <input placeholder="Id" disabled name="id" className="form-control" id="user_id" value={user._id} onChange={handleInputChange}></input>
                             </div>
 
                             <div className="form-group">
@@ -49,6 +43,11 @@ export default function FormUser({ user, handleInputChange, typeChange, handleIn
                             <div className="form-group">
                                 <label for="user_email" className="bmd-label-floating">User - Email</label>
                                 <input placeholder="Email" type="" name="email" className="form-control" id="user_email" value={user.email} onChange={handleInputChange}></input>
+                            </div>
+
+                            <div className="form-group">
+                                <label for="avatar" className="bmd-label-floating">User - Avatar</label>
+                                <textarea placeholder="Avatar" className="form-control" name="avatar" id="user_avatar" rows="2" value={user.avatar} onChange={handleInputChange}></textarea>
                             </div>
 
                         </div>
@@ -137,6 +136,9 @@ export default function FormUser({ user, handleInputChange, typeChange, handleIn
             <button type="submit" className="btn btn-round btn-primary">
                 Salvar
             </button>
+            <a href="/#" onClick={e => { resetPassword(user._id) }} className="btn btn-round btn-danger btnResetPass">
+                Resetar Password
+            </a>
         </section>
 
     )

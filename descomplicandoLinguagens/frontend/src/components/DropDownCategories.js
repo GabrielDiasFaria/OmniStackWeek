@@ -1,7 +1,7 @@
 import React from 'react';
 import api from '../services/api'
 
-export default function DropDownCategory({ currentValue, handleDropChange }) {
+export default function DropDownCategory({ currentValue, handleDropChange, textHelp }) {
 
     const [loading, setLoading] = React.useState(true);
     const [items, setItems] = React.useState([
@@ -20,11 +20,11 @@ export default function DropDownCategory({ currentValue, handleDropChange }) {
 
     React.useEffect(() => {
         handleDropChange(value, 'category')
-    }, [value])
+    }, [])
 
     return (
         <div class="form-group">
-            <label className="control-label">Post - Category</label>
+            <label className="control-label">{textHelp}</label>
             <div className="">
                 <select
                     className="form-control"

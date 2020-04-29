@@ -14,7 +14,7 @@ const Pagination = ({ linesPerPage, totalLines, paginate }) => {
             <ul className="pagination">
                 {pageNumbers.map(number => (
                     <li key={number} className="">
-                        <a hfer="!#" onClick={() => paginate(number)} className="">{number}</a>
+                        <a href="#" onClick={() => paginate(number)} className="">{number}</a>
                     </li>
                 ))}
             </ul>

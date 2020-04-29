@@ -1,0 +1,111 @@
+.backgroundTheme{
+    background-color: rgb(22, 22, 22);
+}
+
+.backgroundTheme2{
+    background-color: #000;
+}
+
+.colorWhite{
+    color: #FFF;
+    /* background-color: #FCB322; */
+    transition: filter 0.5s;
+}
+
+.colorWhite:hover{
+    filter: brightness(70%);
+    /* background-color: #FCB322; */
+    color: #FFF;
+    /* font-size: large; */
+}
+
+.full-width .nav>li>a:hover,.full-width .nav li.active a,.full-width .nav li.dropdown a:hover,.full-width .nav li.dropdown.open a:focus,.full-width .nav .open>a,.full-width .nav .open>a:hover,.full-width .nav .open>a:focus {
+    background-color: #FCB322;
+    text-decoration:none;
+    color:#fff;
+    transition:all 0.3s ease 0s;
+    -webkit-transition:all 0.3s ease 0s;
+    border-radius:30px;
+    -webkit-border-radius:30px;
+}
+
+/* .profile_logout_button {
+    height: 30px;
+    color: #333;
+    border: 1px solid #FFF;
+    border-radius: 10px;
+    padding: 0 24px;
+    background-color: #FFF;
+    transition: filter 0.5s;
+}
+
+.profile_logout_button:hover{
+    filter: brightness(70%);
+}
+
+.profile_title_user{
+    color: #FFF;
+    margin-right: 40px;
+    transition: filter 0.5s;
+}
+
+.profile_title_user:hover{
+    color: #FFF;
+    filter: brightness(80%);
+}
+
+.profile_title_font{
+    font-size: 10px;
+}
+
+.profile_navLink{
+    margin-left: 5px;
+    color: #FFF;
+    transition: filter 0.5s;
+}
+
+.profile_navLink:hover{
+    filter: brightness(80%);
+    color: #FFF;
+    text-decoration: none;
+}
+
+.profile_navLink_Icon{
+    margin-left: 8px;
+    color: #FFF;
+}
+
+.profile_badge{
+    margin-right: 15px;
+}
+
+.profileFiBell{
+    margin-left: 8px;
+    transition: filter 0.5s;
+    color: #FFF;
+}
+
+.profileFiBell:hover{
+    filter: brightness(80%);
+    color: #FFF;
+    text-decoration: none;
+}
+
+
+
+.drop_item{
+    font-size: 10px;
+} */
+
+/* .brand{
+    background-color: #FCB322;
+} */
+
+header{
+    background-color: #000;
+}
+
+.logo{
+    float: left;
+}
+

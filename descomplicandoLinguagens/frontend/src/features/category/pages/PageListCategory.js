@@ -117,7 +117,7 @@ export default function PageListCategory() {
                             <header className="panel-heading">
                                 Lista de Categorias
                                 <span className="tools pull-right">
-                                    <button type="button" className="btn btn-round btn-primary tagAddBtn" onClick={startAddCategory}>
+                                    <button type="button" className="btn btn-round btn-warning tagAddBtn" onClick={startAddCategory}>
                                         {txtButton}
                                     </button>
                                 </span>

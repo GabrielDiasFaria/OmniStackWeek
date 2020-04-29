@@ -17,8 +17,23 @@ export default function FormPost({ post, handleDropChange, handleInputChange, ty
                 </div>
 
                 <div className="form-group">
-                    <label for="description" className="bmd-label-floating">Post Descrição</label>
-                    <textarea placeholder="Descrição" className="form-control" name="description" id="post_description" rows="3" value={post.description} onChange={handleInputChange}></textarea>
+                    <label for="title" className="bmd-label-floating">Post - Título</label>
+                    <input placeholder="Título" className="form-control" maxlength="20" name="title" id="post_title" value={post.title} onChange={handleInputChange}></input>
+                </div>
+
+                <div className="form-group">
+                    <label for="description" className="bmd-label-floating">Post - Descrição</label>
+                    <textarea placeholder="Descrição" className="form-control" maxlength="44" name="description" id="post_description" rows="3" value={post.description} onChange={handleInputChange}></textarea>
+                </div>
+
+                <div className="form-group">
+                    <label for="image" className="bmd-label-floating">Post - Imagem</label>
+                    <textarea placeholder="Imagem" className="form-control" name="image" id="post_image" rows="2" value={post.image} onChange={handleInputChange}></textarea>
+                </div>
+
+                <div className="form-group">
+                    <label for="banner" className="bmd-label-floating">Post - Banner</label>
+                    <textarea placeholder="Banner" className="form-control" name="banner" id="post_banner" rows="2" value={post.banner} onChange={handleInputChange}></textarea>
                 </div>
 
                 {/* <div className="form-group">
@@ -31,9 +46,9 @@ export default function FormPost({ post, handleDropChange, handleInputChange, ty
                     <input placeholder="Categoria" className="form-control" name="category" id="post_category" value={post.category} onChange={handleInputChange}></input>
                 </div> */}
 
-                <DropDownTags handleDropChange={handleDropChange} currentValue={post.tag} />
+                <DropDownTags handleDropChange={handleDropChange} currentValue={post.tag} textHelp="Post - Tag" />
 
-                <DropDownCategories handleDropChange={handleDropChange} currentValue={post.category} />
+                <DropDownCategories handleDropChange={handleDropChange} currentValue={post.category} textHelp="Post - Category" />
 
             </div>
         </div>

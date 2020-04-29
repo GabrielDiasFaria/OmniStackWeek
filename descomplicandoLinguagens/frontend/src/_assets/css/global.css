@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap');
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font: 400 14px Montserrat, sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -27,8 +31,8 @@ body {
     /* width: 100%; */
     height: 30px;
     color: black;
-    background-color: #09F4C4;
-    border: 1px solid #09F4C4;
+    background-color: #FCB322;
+    border: 1px solid #FCB322;
     border-radius: 77px;
     padding: 0 20px;
     margin-top: 10px;  
@@ -38,14 +42,14 @@ body {
 
 .btn_default:hover{
     filter: brightness(70%);
-    background-color: #09F4C4;
+    background-color: #FCB322;
 }
 
 .icon_default{
     margin-right: 5px;
-    background-color: #09F4C4;
+    background-color: #FCB322;
     border-color: #FFF;
-    color: #000;
+    color: #fff;
     transition: filter 0.5s;
 }
 
@@ -56,7 +60,7 @@ body {
 
 .icon_default:hover{
   filter: brightness(70%);
-  color: #000;
+  color: #fff;
 }
 
 .contentDescription{
@@ -66,8 +70,8 @@ body {
 
 .thead-color{
   /* background-color: #C4C4C4; */
-  background-color: #09F4C4; /*rgb(6, 134, 109);*/
-  color: #000;
+  background-color: #FCB322; /*rgb(6, 134, 109);*/
+  color: #fff;
 } 
 
 .tagAddBtn{
@@ -87,26 +91,28 @@ cursor: pointer;
   display: none;
 }
 
-
 .btn-primary{
-  background-color: #09F4C4;
-  border-color: #09F4C4;
+  background-color: #FCB322;
+  border-color: #FCB322;
   transition: filter 0.5s;
-  color: #000;
+  color: #fff;
 }
 
-.btn-primary:hover{  
+.btn-primary:hover{ 
   filter: brightness(90%);
-  background-color: #09F4C4;
-  border-color: #09F4C4;
-  color: #000;
+  background-color: #FCB322;
+  border-color: #FCB322;
+  color: #fff;
 }
 
+.btnResetPass{
+  margin-left: 5px;
+}
 
 .spinner {
   width: 40px;
   height: 40px;
-  background-color: #09F4C4;
+  background-color: #FCB322;
 
   margin: 100px auto;
   -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
@@ -132,3 +138,159 @@ cursor: pointer;
   }
 }
 
+.galleryList{
+  position: relative; 
+  overflow: hidden; 
+  height: 290px;
+}
+
+.galleryItem{
+  position: absolute; 
+  left: 0px; 
+  top: 0px; 
+  transform: translate3d(0px, 0px, 0px);
+}
+
+.imgPreview{
+  width: 250px;
+  height: 250px;
+}
+
+.modalBtn{
+  display: none
+}
+
+.inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 10px;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: inherit;
+  display: block;
+  color: #26282d;
+}
+
+.page-blog-cats .title{
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 0;
+  font-size: 32px;
+  line-height: 1.5;
+  text-align: center;
+  box-sizing: inherit;
+  margin-top: -50px;
+}
+
+.filterCat{
+  vertical-align: top;
+  margin-left: .35em;
+  display: inline-block;
+  margin: auto;
+  margin-left: 15px;
+  margin-top: -55px;
+}
+
+.imgIcon{
+  width: 40px;
+  height: 40px;
+  /* background-color: #000; */
+}
+
+.btnCard{
+  margin-right: 10px;
+}
+
+.marginTop20{
+  margin-top: 60px;
+}
+
+.iconFooter{
+  color: #FCB322;
+  text-align: center;
+  font-size: 20px;
+}
+
+.socialIcon{
+  font-size: 20px;
+  color: #FFF;
+  margin-left: 20px;
+}
+
+.logoFooter{
+  margin-right: 50px;
+}
+
+.bannerNews{
+  background-color: #FCB322;  
+}
+
+.bannerNewsSpan{
+font-size: 15px;
+margin-top: -10px;
+}
+
+.bannerNewsSpans{
+  margin-top: 30px;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.bannerNewsEmail{
+  margin-top: 30px;
+}
+
+.bannerNewsBtn{
+  cursor: pointer;
+  background-color: #000;
+  color: #FFF;
+  border-color: #000;
+  border-radius: 15px;
+}
+
+/* .cardBlog{
+  height: 30px;
+} */
+
+.bold{
+  font-weight: bold;
+}
+
+.footer-section{
+  background-color: #000;
+}
+
+#newsletter{
+  margin-top: 60px;
+}
+
+.titleCard{
+  margin-left: -12px;
+}
+
+.colorBlack{
+  color: #000;
+}
+
+.zoom {
+  /* padding: 50px; */
+  /* background-color: green; */
+  transition: transform .2s; /* Animation */
+  /* width: 200px; */
+  /* height: 200px; */
+  /* margin: 0 auto; */
+}
+
+.zoom:hover {
+  transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.postHtml{
+  margin-top: 50px;
+}
+
+.nameAuthor{
+  margin-top: 5px;
+}

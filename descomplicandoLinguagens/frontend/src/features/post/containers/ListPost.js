@@ -1,7 +1,6 @@
 import React from 'react'
 import { FiTrash, FiEdit } from 'react-icons/fi'
-
-import logoAvatar from '../../../_assets/img/avatar.jpg'
+import globalConfig from '../../../utils/globalConfig'
 
 export default function ListPost(
     {
@@ -24,9 +23,11 @@ export default function ListPost(
                     <tr>
                         <th>#</th>
                         <th>Imagem</th>
+                        <th>Título</th>
                         <th>Descrição</th>
                         <th>Tag</th>
                         <th>Categoria</th>
+                        <th>Views</th>
                         <th>Editar</th>
                         <th>Deletar</th>
                     </tr>
@@ -37,10 +38,12 @@ export default function ListPost(
                             list.map(line => (
                                 <tr key={line._id}>
                                     <td>{line._id}</td>
-                                    <td><img src={logoAvatar} alt="Post Img" /></td>
+                                    <td><img src={globalConfig.baseURL + '/images/' + line.image} className="imgIcon" alt="Post Img" /></td>
+                                    <td>{line.title}</td>
                                     <td>{line.description}</td>
                                     <td>{line.tag}</td>
                                     <td>{line.category}</td>
+                                    <td>{line.views}</td>
                                     <td>
                                         <button onClick={() => { startEditRow(line) }} className="btn icon_default">
                                             <FiEdit size={16} />

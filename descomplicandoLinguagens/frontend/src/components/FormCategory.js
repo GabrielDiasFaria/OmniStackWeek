@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function FormCategory({ category, handleInputChange, typeChange }) {
+
     return (
         <div className="position-center">
             <div className="col-sm-12">

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let MidiaSchema = new Schema({
-    name: { type: String, required: true, max: 100 },
+    name: { type: String, required: true },
     file: { type: String, required: true }
 });
 

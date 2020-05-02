@@ -12,9 +12,9 @@ async function addView(post) {
 
     await PostSchema.updateOne(filter, update, (err, result) => {
         if (!err) {
-            return ({ status: "Registro modificado com sucesso!" })
+            return ({ message: "Registro modificado com sucesso!" })
         } else {
-            return ({ status: "Erro" })
+            return ({ message: "Erro" })
         }
 
     })
@@ -125,7 +125,7 @@ module.exports = {
             if (err)
                 return res.send(err)
             else
-                return res.send({ status: "Registro criado com sucesso!" })
+                return res.send({ message: "Registro criado com sucesso!" })
         })
     },
 
@@ -135,10 +135,10 @@ module.exports = {
         // Check Permission
         // const userExists = await UserController.checkExists(userId, "post", 'update')
         // if (!userExists.name) {
-        //     return res.send({ status: "Usuário sem permissão para efetuar este processo!" })
+        //     return res.send({ message: "Usuário sem permissão para efetuar este processo!" })
         // } else {
         //     if (!userExists.permission.posts.create)
-        //         return res.send({ status: "Usuário sem permissão para efetuar este processo!" })
+        //         return res.send({ message: "Usuário sem permissão para efetuar este processo!" })
         // }
 
         const filter = { _id: req.params.id };
@@ -157,7 +157,7 @@ module.exports = {
 
         const response = await PostSchema.updateOne(filter, update, (err, result) => {
             if (!err)
-                return { status: "Registro modificado com sucesso!" }
+                return { message: "Registro modificado com sucesso!" }
             else
                 return err
         })
@@ -171,7 +171,7 @@ module.exports = {
             if (err)
                 return res.send(err)
             else
-                return res.send({ status: "Registro deletado com sucesso!" })
+                return res.send({ message: "Registro deletado com sucesso!" })
         })
     }
 

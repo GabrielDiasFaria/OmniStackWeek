@@ -39,12 +39,18 @@ export default function PageListMidia() {
     /** Delete */
     const deleteRegister = async id => {
         setDeleting(true)
-        await api.delete(`midias/${id}`)
+        await api.delete(`midias/${id}`).then((response) => {
+            setMsgAlert(response.data.message)
+            showAlert()
 
-        setMsgAlert(`Midia (${id}) deletada com sucesso!`)
-        showAlert()
-        setCurrentPage(1)
-        setDeleting(false)
+            if (!response.data.errors) {
+                setCurrentPage(1)
+                setDeleting(false)
+            }
+        }).catch((e) => {
+            setMsgAlert(e.errors.message)
+            showAlert()
+        })
     }
 
     /** Start New */
@@ -59,12 +65,17 @@ export default function PageListMidia() {
     }
 
     /** End New */
-    const endAddMidia = () => {
-        setMsgAlert(`Mídia criada com sucesso!`)
+    const endAddMidia = (response) => {
+
+        setMsgAlert(response.data.message)
         showAlert()
-        setTxtButton('Adicionar')
-        setCurrentPage(1)
-        setAdding(false)
+
+        if (!response.data.errors) {
+            setTxtButton('Adicionar')
+            setCurrentPage(1)
+            setAdding(false)
+        }
+
     }
 
     const hideAlert = () => {

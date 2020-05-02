@@ -46,12 +46,18 @@ export default function PageListTag() {
     /** Delete Tag */
     const deleteTag = async id => {
         setDeleting(true)
-        await api.delete(`tags/${id}`)
+        await api.delete(`tags/${id}`).then((response) => {
+            setMsgAlert(response.data.message)
+            showAlert()
 
-        setMsgAlert(`Tag (${id}) deletada com sucesso!`)
-        showAlert()
-        setCurrentPage(1)
-        setDeleting(false)
+            if (!response.data.errors) {
+                setCurrentPage(1)
+                setDeleting(false)
+            }
+        }).catch((e) => {
+            setMsgAlert(e.errors.message)
+            showAlert()
+        })
     }
 
     /** Start New */
@@ -68,12 +74,18 @@ export default function PageListTag() {
 
     /** End New */
     const endAddTag = async tag => {
-        await api.post('tags', tag)
+        await api.post('tags', tag).then((response) => {
+            setMsgAlert(response.data.message)
+            showAlert()
 
-        setMsgAlert(`Tag (${tag.id}) criada com sucesso!`)
-        showAlert()
-        setTxtButton('Adicionar')
-        setAdding(false)
+            if (!response.data.errors) {
+                setTxtButton('Adicionar')
+                setAdding(false)
+            }
+        }).catch((e) => {
+            setMsgAlert(e.errors.message)
+            showAlert()
+        })
     }
 
     /** Start Edit */
@@ -85,12 +97,18 @@ export default function PageListTag() {
 
     /** End Edit */
     const endEditRow = async (id, updatedTag) => {
-        await api.put(`tags/${id}`, updatedTag)
+        await api.put(`tags/${id}`, updatedTag).then((response) => {
+            setMsgAlert(response.data.message)
+            showAlert()
 
-        setMsgAlert(`Tag (${id}) modificada com sucesso!`)
-        showAlert()
-        setTxtButton('Adicionar')
-        setEditing(false)
+            if (!response.data.errors) {
+                setTxtButton('Adicionar')
+                setEditing(false)
+            }
+        }).catch((e) => {
+            setMsgAlert(e.errors.message)
+            showAlert()
+        })
     }
 
     const hideAlert = () => {

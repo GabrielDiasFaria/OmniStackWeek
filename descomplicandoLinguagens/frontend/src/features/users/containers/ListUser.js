@@ -1,5 +1,6 @@
 import React from 'react'
 import { FiTrash, FiEdit } from 'react-icons/fi'
+import globalConfig from '../../../utils/globalConfig'
 
 export default function ListUser(
     {
@@ -36,7 +37,7 @@ export default function ListUser(
                             list.map(line => (
                                 <tr key={line._id}>
                                     <td>{line._id}</td>
-                                    <td><img src={line.avatar} alt="User Img" width="50" height="50" /></td>
+                                    <td><img src={globalConfig.baseURL + '/images/' + line.avatar} alt="User Img" width="50" height="50" /></td>
                                     <td>{line.name}</td>
                                     <td>{line.function}</td>
                                     <td>{line.profile}</td>

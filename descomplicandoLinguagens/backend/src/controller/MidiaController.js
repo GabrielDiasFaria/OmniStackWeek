@@ -1,6 +1,6 @@
-var MidiaSchema = require('../model/MidiaModel');
+const MidiaSchema = require('../model/MidiaModel');
 const fs = require('fs')
-var path = require("path")
+const path = require("path")
 
 async function details(id) {
     return await (await MidiaSchema.findById(id, (err, object) => { }))
@@ -19,19 +19,29 @@ module.exports = {
 
     async create(req, res) {
         // console.log("Requests file ---", req.file)
-        let midia = new MidiaSchema(
-            {
-                name: req.file.originalname,
-                file: `/images/${req.file.originalname}`
-            }
-        )
 
-        await midia.save((err) => {
-            if (err)
-                return res.send(err)
-            else
-                return res.send({ status: "Registro criado com sucesso!" })
-        })
+        try {
+            let midia = new MidiaSchema(
+                {
+                    name: `${req.file.originalname}`,
+                    file: `/images/${req.file.originalname}`
+                }
+            )
+        } catch (e) {
+            console.log("erro")
+            res.send(e);
+        } finally {
+            console.log("retorno")
+            return res.send({ message: "Upload realizado com sucesso!" })
+            // await midia.save((err) => {
+            //     if (err)
+            //         return res.send(err)
+            //     else
+            //         return res.send({ message: "Registro criado com sucesso!" })
+            // })
+        }
+
+
     },
 
     async delete(req, res) {
@@ -48,7 +58,7 @@ module.exports = {
             if (err)
                 return res.send(err)
             else
-                return res.send({ status: "Registro deletado com sucesso!" })
+                return res.send({ message: `Registro deletado com sucesso!` })
         })
     }
 

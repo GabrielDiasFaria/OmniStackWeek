@@ -46,12 +46,18 @@ export default function PageListCategory() {
     /** Delete */
     const deleteRegister = async id => {
         setDeleting(true)
-        await api.delete(`categories/${id}`)
+        await api.delete(`categories/${id}`).then((response) => {
+            setMsgAlert(response.data.message)
+            showAlert()
 
-        setMsgAlert(`Categoria (${id}) deletada com sucesso!`)
-        showAlert()
-        setCurrentPage(1)
-        setDeleting(false)
+            if (!response.data.errors) {
+                setCurrentPage(1)
+                setDeleting(false)
+            }
+        }).catch((e) => {
+            setMsgAlert(e.errors.message)
+            showAlert()
+        })
     }
 
     /** Start New */
@@ -68,12 +74,18 @@ export default function PageListCategory() {
 
     /** End New */
     const endAddCategory = async category => {
-        await api.post('categories', category)
+        await api.post('categories', category).then((response) => {
+            setMsgAlert(response.data.message)
+            showAlert()
 
-        setMsgAlert(`Categoria (${category.id}) criada com sucesso!`)
-        showAlert()
-        setTxtButton('Adicionar')
-        setAdding(false)
+            if (!response.data.errors) {
+                setTxtButton('Adicionar')
+                setAdding(false)
+            }
+        }).catch((e) => {
+            setMsgAlert(e.errors.message)
+            showAlert()
+        })
     }
 
     /** Start Edit */
@@ -85,12 +97,18 @@ export default function PageListCategory() {
 
     /** End Edit */
     const endEditRow = async (id, updatedCategory) => {
-        await api.put(`categories/${id}`, updatedCategory)
+        await api.put(`categories/${id}`, updatedCategory).then((response) => {
+            setMsgAlert(response.data.message)
+            showAlert()
 
-        setMsgAlert(`Categoria (${id}) modificada com sucesso!`)
-        showAlert()
-        setTxtButton('Adicionar')
-        setEditing(false)
+            if (!response.data.errors) {
+                setTxtButton('Adicionar')
+                setEditing(false)
+            }
+        }).catch((e) => {
+            setMsgAlert(e.errors.message)
+            showAlert()
+        })
     }
 
     const hideAlert = () => {

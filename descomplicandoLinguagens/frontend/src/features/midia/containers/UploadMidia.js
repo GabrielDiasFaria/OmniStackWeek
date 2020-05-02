@@ -22,7 +22,10 @@ class ReactUploadImage extends React.Component {
             }
         };
         api.post('midias', formData, config).then((response) => {
-            this.endAddMidia()
+            console.log(response)
+            this.endAddMidia(response)
+        }).catch(function (error) {
+            console.log(error.response)
         })
     }
     onChange(e) {

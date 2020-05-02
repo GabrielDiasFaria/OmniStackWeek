@@ -59,21 +59,34 @@ export default function PageListUser() {
     /** Delete */
     const deleteRegister = async id => {
         setDeleting(true)
-        await api.delete(`users/${id}`)
+        await api.delete(`users/${id}`).then((response) => {
+            setMsgAlert(response.data.message)
+            showAlert()
 
-        setMsgAlert(`Usuário (${id}) deletado com sucesso!`)
-        showAlert()
-        setCurrentPage(1)
-        setDeleting(false)
+            if (!response.data.errors) {
+                setCurrentPage(1)
+                setDeleting(false)
+            }
+        }).catch((e) => {
+            setMsgAlert(e.errors.message)
+            showAlert()
+        })
+
     }
 
     const resetPassword = async id => {
-        let response = await api.put(`resetUserPass/${id}`)
+        let response = await api.put(`resetUserPass/${id}`).then((response) => {
+            setMsgAlert(response.data.message)
+            showAlert()
 
-        setMsgAlert(response.data.status)
-        showAlert()
-        setCurrentPage(1)
-        setEditing(false)
+            if (!response.data.errors) {
+                setCurrentPage(1)
+                setEditing(false)
+            }
+        }).catch((e) => {
+            setMsgAlert(e.errors.message)
+            showAlert()
+        })
     }
 
     /** Start New */
@@ -90,12 +103,18 @@ export default function PageListUser() {
 
     /** End New */
     const endAddUser = async user => {
-        await api.post('users', user)
+        await api.post('users', user).then((response) => {
+            setMsgAlert(response.data.message)
+            showAlert()
 
-        setMsgAlert(`Usuário (${user.id}) criado com sucesso!`)
-        showAlert()
-        setTxtButton('Adicionar')
-        setAdding(false)
+            if (!response.data.errors) {
+                setTxtButton('Adicionar')
+                setAdding(false)
+            }
+        }).catch((e) => {
+            setMsgAlert(e.errors.message)
+            showAlert()
+        })
     }
 
     /** Start Edit */
@@ -107,12 +126,18 @@ export default function PageListUser() {
 
     /** End Edit */
     const endEditRow = async (id, updatedUser) => {
-        await api.put(`users/${id}`, updatedUser)
+        await api.put(`users/${id}`, updatedUser).then((response) => {
+            setMsgAlert(response.data.message)
+            showAlert()
 
-        setMsgAlert(`Usuário (${id}) modificado com sucesso!`)
-        showAlert()
-        setTxtButton('Adicionar')
-        setEditing(false)
+            if (!response.data.errors) {
+                setTxtButton('Adicionar')
+                setEditing(false)
+            }
+        }).catch((e) => {
+            setMsgAlert(e.errors.message)
+            showAlert()
+        })
     }
 
     const hideAlert = () => {

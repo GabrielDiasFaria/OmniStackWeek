@@ -33,7 +33,7 @@ module.exports = {
             if (err)
                 return res.send(err)
             else
-                return res.send({ status: "Registro criado com sucesso!" })
+                return res.send({ message: "Registro criado com sucesso!" })
         })
     },
 
@@ -47,7 +47,7 @@ module.exports = {
 
         await CategorySchema.updateOne(filter, update, (err, result) => {
             if (!err)
-                return res.send({ status: "Registro modificado com sucesso!" })
+                return res.send({ message: "Registro modificado com sucesso!" })
             else
                 return res.send(err)
         })
@@ -59,7 +59,7 @@ module.exports = {
             if (err)
                 return res.send(err)
             else
-                return res.send({ status: "Registro deletado com sucesso!" })
+                return res.send({ message: "Registro deletado com sucesso!" })
         })
     }
 

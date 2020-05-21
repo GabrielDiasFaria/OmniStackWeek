@@ -15,6 +15,14 @@ node index.js
 npm i -g create-react-app
 npx create-react-app Nome_Do_Projeto
 
+// Apagar arquivos Padrões
+src
+- deixar somente App.js e Index.js
+public
+- deixar somente index.html e favicon.ico
+
+
+
 // Rodar o React
 npm start
 
